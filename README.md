@@ -1,5 +1,5 @@
 # Project : ViGamesList
-This project aims to create a web app that allows users to search and rate video games they played. Basically it takes the concept of IMDb but with video games. A user can add a game to his list, rate it, upload a review. Admins can add new games to the website and manage users in case a comment has insults for example.
+This project aims to create a web app that allows users to search and rate video games they played or want to play. Basically it takes the concept of IMDb but with video games. A user can add a game to his list, rate it, upload a review. Admins can add new games to the website and manage users in case a comment has insults for example. It is a forum about video games where user can search for informations and interact with each others.
 
 ## Member(s)
 Tristan Fontanière - Erasmus student
