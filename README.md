@@ -3,3 +3,9 @@ This project aims to create a web app that allows users to search and rate video
 
 ## Member(s)
 Tristan Fontanière - Erasmus student
+
+# User stories
+- Any user can add a game to his personal list, give it a grade out of 10, write a review about this game and select a status (finished, plan to play, etc).
+- An admin can add, delete or update games without having to deal with code, a specific page allows them to do that.
+- Any user can search a game by its name to access its page and see what other users wrote about it.
+- Any user can customize his profile : picture, bio, display his reviews or keep it private.
