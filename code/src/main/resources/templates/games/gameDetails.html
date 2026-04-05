@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${game.name}">Details about </title>
+</head>
+<body>
+
+<h1 th:text="|Name : ${game.name}|">Default name</h1>
+
+<p th:text="| Synopsis : ${game.synopsis}|">Description</p>
+
+<p>Engine : <span th:text="${game.engine}">Engine</span></p>
+
+<h2>Players reviews</h2>
+<ul>
+    <li th:each="r : ${reviews}">
+        <h3 th:text="${r.author.username}"></h3>
+        <h3 th:text="|Grade : ${r.grade}|"></h3>
+        <p th:text="${r.comment}"></p>
+
+    </li>
+</ul>
+
+</body>
+</html>
