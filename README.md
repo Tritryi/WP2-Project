@@ -12,3 +12,6 @@ Tristan Fontanière - Erasmus student
 
 # Wireframe
 The wireframe for my project is accessible at [this address](https://www.figma.com/design/5f4VAA7yVJm3lzK4ta7qPX/WP2-Project?node-id=0-1&t=Wdugx0VIEvO5B8x1-1)
+
+# Planning
+The planning for the project is on Trello at [this address](https://trello.com/invite/b/69c5236e69b18c36bf2eeeb3/ATTI2c884a08a2a4d00051163e83125f91ccD9768621/wp2-planning)
