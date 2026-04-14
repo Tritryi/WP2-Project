@@ -1,0 +1,20 @@
+package com.project.controller;
+
+
+import com.project.entities.User;
+import com.project.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+    @RestController
+    @RequestMapping("/api/user")
+    @CrossOrigin(origins = "http://localhost:5173")
+    public class UserController {
+        @Autowired
+        private UserService userService;
+
+        @PostMapping("/register")
+        public User register(@RequestBody User user){
+            return userService.createNewUser(user);
+        }
+    }

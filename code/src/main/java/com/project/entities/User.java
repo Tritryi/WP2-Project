@@ -18,11 +18,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // to create an account
     private String username;
-    private String profilPicture;
+    private String email;
     private String password;
+
+    private String profilPicture;
     private String bio;
     private String computerSpecs;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ManyToMany
     private List<Game> favoriteGames = new ArrayList<>();

@@ -1,6 +1,7 @@
 package com.project.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,8 +28,12 @@ public class Game {
     private Double averageTimeToFinish;
 
     @Enumerated(EnumType.STRING)
+    private Genre genre;
+
+    @Enumerated(EnumType.STRING)
     private GraphicEngine engine;
 
     @OneToMany(mappedBy = "game")
+    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 }

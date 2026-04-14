@@ -1,0 +1,7 @@
+.links{
+    text-decoration: none;
+}
+.links:hover{
+    opacity: 80%;
+    transition: 0.3s;
+}

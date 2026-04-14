@@ -6,5 +6,8 @@ public enum Studio {
     VALVE,
     HOYOVERSE,
     ELECTRONIC_ARTS,
-    FROM_SOFTWARE
+    FROM_SOFTWARE,
+    BETHESDA,
+    SANDFALL,
+    RIOT_GAMES
 }
