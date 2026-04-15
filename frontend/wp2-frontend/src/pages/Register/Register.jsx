@@ -58,8 +58,7 @@ function Register(){
         <>
         <div className="container flex-grow-1 d-flex justify-content-center align-items-center py-5">
     
-    {/* Card pour l'unité visuelle avec le Login */}
-    <div className="card shadow border-0 p-4" style={{ width: "100%", maxWidth: "400px" }}>
+        <div className="card shadow border-0 p-4" style={{ width: "100%", maxWidth: "400px" }}>
         
         <h2 className="text-center mb-4 fw-bold">Create Account</h2>
 
