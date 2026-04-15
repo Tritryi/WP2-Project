@@ -9,6 +9,7 @@ import Game from './pages/Game'
 import Footer from './assets/Footer/Footer';
 import Register from './pages/Register';
 import Login from './pages/Login'
+import Profil from './pages/Profil';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
         <Route path='/game/:id' element={<Game />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
+        <Route path='/profile' element={<Profil />} />
       </Routes>
       </main>
       <Footer />

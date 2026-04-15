@@ -28,7 +28,7 @@ function Navbar() {
                     </>
                 ): (
                     <>
-                        <span className='text-light '>Hello</span>
+                        <Link className={`nav-item text-light ${styles.links}`} to="/profile">My profile</Link>
                         <button className='nav-item btn btn-outline-danger btn-sm'
                         onClick={handleLogout}
                         >Logout</button>
