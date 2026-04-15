@@ -22,6 +22,7 @@ public class SecurityConfig {
                 // access rights
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/user/register").permitAll()
+                        .requestMatchers("/api/user/login").permitAll()
                         .requestMatchers("/api/game/**").permitAll()
                         .anyRequest().authenticated()
                 );

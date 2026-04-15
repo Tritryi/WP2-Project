@@ -5,4 +5,6 @@ public enum Genre {
     RPG,
     MOBA,
     SOULLIKE,
+    TPS,
+    NARRATIVE
 }

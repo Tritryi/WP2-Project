@@ -28,7 +28,9 @@ public class Game {
     private Double averageTimeToFinish;
 
     @Enumerated(EnumType.STRING)
-    private Genre genre;
+    @ElementCollection(targetClass = Genre.class)
+    @Column(name = "genre")
+    private List<Genre> genres;
 
     @Enumerated(EnumType.STRING)
     private GraphicEngine engine;

@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface GameRepository extends JpaRepository<Game, Long> {
-    @Query("SELECT DISTINCT g FROM Game g WHERE g.genre = :genre")
+    @Query("SELECT g FROM Game g JOIN g.genres genre WHERE genre = :genre")
     List<Game> findTop3ByGenre(@Param("genre") Genre genre);
 }

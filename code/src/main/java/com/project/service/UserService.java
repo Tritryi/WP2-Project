@@ -13,11 +13,20 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     public User createNewUser(User user){
         String hashedPwd = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPwd);
         user.setRole(Role.USER);
 
         return userRepository.save(user);
+    }
+
+    public User loginUser(User user){
+        User userbymail  = userRepository.findByEmail(user.getEmail());
+        if(userbymail != null && passwordEncoder.matches(user.getPassword(),userbymail.getPassword())){
+            return userbymail;
+        }
+        return null;
     }
 }

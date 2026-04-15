@@ -8,6 +8,10 @@ import com.project.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 @Component
 public class Initializer implements CommandLineRunner {
@@ -30,7 +34,7 @@ public class Initializer implements CommandLineRunner {
         g1.setSynopsis("Dive into the city of Lumière and find out the secrets behind the Gommage event");
         g1.setAverageTimeToFinish(30.0);
         g1.setEngine(GraphicEngine.UNREAL_ENGINE_5);
-        g1.setGenre(Genre.RPG);
+        g1.setGenres(List.of(Genre.RPG, Genre.TPS, Genre.NARRATIVE));
         gameService.save(g1);
 
         Game g2 = new Game();
@@ -39,7 +43,7 @@ public class Initializer implements CommandLineRunner {
         g2.setSynopsis("Explore american Texas under a drug dealer dictature, free the land");
         g2.setAverageTimeToFinish(40.0);
         g2.setEngine(GraphicEngine.PROPRIETARY);
-        g2.setGenre(Genre.RPG);
+        g2.setGenres(List.of(Genre.RPG));
         gameService.save(g2);
 
         Game g3 = new Game();
@@ -48,7 +52,7 @@ public class Initializer implements CommandLineRunner {
         g3.setSynopsis("");
         g3.setAverageTimeToFinish(100.0);
         g3.setEngine(GraphicEngine.PROPRIETARY);
-        g3.setGenre(Genre.RPG);
+        g3.setGenres(List.of(Genre.RPG, Genre.TPS));
         gameService.save(g3);
 
         Game g4 = new Game();
@@ -57,7 +61,7 @@ public class Initializer implements CommandLineRunner {
         g4.setSynopsis("Select a role and fight other players, master your favorite character");
         g4.setAverageTimeToFinish(0.0);
         g4.setEngine(GraphicEngine.PROPRIETARY);
-        g4.setGenre(Genre.FPS);
+        g4.setGenres(List.of(Genre.FPS));
         gameService.save(g4);
 
         Game cs = new Game();
@@ -66,7 +70,7 @@ public class Initializer implements CommandLineRunner {
         cs.setSynopsis("A tactical first-person shooter where two teams, Terrorists and Counter-Terrorists, compete in objective-based game modes.");
         cs.setAverageTimeToFinish(0.0);
         cs.setEngine(GraphicEngine.PROPRIETARY);
-        cs.setGenre(Genre.FPS);
+        cs.setGenres(List.of(Genre.FPS));
         gameService.save(cs);
 
         Game val = new Game();
@@ -75,7 +79,7 @@ public class Initializer implements CommandLineRunner {
         val.setSynopsis("A character-based 5v5 tactical shooter set on a near-future Earth, combining precise gunplay with unique agent abilities.");
         val.setAverageTimeToFinish(0.0);
         val.setEngine(GraphicEngine.UNREAL_ENGINE_5);
-        val.setGenre(Genre.FPS);
+        val.setGenres(List.of(Genre.FPS));
         gameService.save(val);
 
 
