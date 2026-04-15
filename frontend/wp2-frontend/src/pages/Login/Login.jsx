@@ -4,7 +4,9 @@ import { loginUser } from '../../services/user.service';
 
 function Login(){
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState("")
+
+    const [successMsg, setSucces] = useState("");
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -15,7 +17,17 @@ function Login(){
 
         const response = await loginUser(user);
         if(response.ok){
-            alert("Login successfull");
+            const data = await response.json();
+
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            
+            setSucces("Login successful, redirecting...")
+
+            setTimeout(function(){
+                window.location.href = "/";
+            }, 2000);
+
         }else{
             alert("A problem occured");
         }
@@ -28,6 +40,8 @@ function Login(){
         <div className="card shadow border-0 p-4" style={{ width: "100%", maxWidth: "400px" }}>
             
             <h2 className="text-center mb-4 fw-bold">Login</h2>
+
+            <div className='text-success text-lg-center fw-bold animate__animated animate__fadeIn'>{successMsg}</div>
 
             <form className="d-flex flex-column gap-3"
             onSubmit={handleLogin}>
