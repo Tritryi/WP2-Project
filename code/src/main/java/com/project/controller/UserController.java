@@ -1,6 +1,8 @@
 package com.project.controller;
 
 
+import com.project.config.AuthResponse;
+import com.project.config.JwUtils;
 import com.project.entities.User;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
     public class UserController {
         @Autowired
         private UserService userService;
+        @Autowired
+        private JwUtils jwUtils;
 
         @PostMapping("/register")
         public User register(@RequestBody User user){
@@ -21,12 +25,14 @@ import org.springframework.web.bind.annotation.*;
         }
 
         @PostMapping("/login")
-        public ResponseEntity<User> login(@RequestBody User user){
+        public ResponseEntity<?> login(@RequestBody User user){
+            System.out.println("I received : "+user.getEmail());
             User auth =  userService.loginUser(user);
             if(auth != null){
-                return ResponseEntity.ok(auth);
+                String token = jwUtils.generateToken(auth.getUsername());
+                return ResponseEntity.ok(new AuthResponse(token, auth));
             }else{
-                return ResponseEntity.status(401).build();
+                return ResponseEntity.status(401).body("Invalid authentication");
             }
         }
     }
