@@ -45,9 +45,9 @@ function Home(){
         <div className="mb-5">
             <h1><strong>Most popular</strong></h1>
             <div class="d-flex flex-row gap-3">
-                <Gamecard game_id={1} width='45%'/>
-                <Gamecard game_id={2} width='45%'/>
-                <Gamecard game_id={4} width='45%'/>
+                <Gamecard game_id={62} width='45%'/>
+                <Gamecard game_id={63} width='45%'/>
+                <Gamecard game_id={64} width='45%'/>
             </div>
         </div>
         <hr />

@@ -1,4 +1,4 @@
-package com.project.config; // Adapte selon le nom de ton projet
+package com.project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
