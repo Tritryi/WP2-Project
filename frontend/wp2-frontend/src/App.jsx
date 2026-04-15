@@ -8,19 +8,26 @@ import Home from './pages/Home'
 import Game from './pages/Game'
 import Footer from './assets/Footer/Footer';
 import Register from './pages/Register';
+import Login from './pages/Login'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <BrowserRouter>
+    <div className='d-flex flex-column min-vh-100'>
       <Navbar />
-      <Routes>
+      <main className='flex-grow-1'>
+        <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/game/:id' element={<Game />}/>
+        <Route path='/login' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
       </Routes>
+      </main>
       <Footer />
+    </div>
+      
     </BrowserRouter>
   );
 }

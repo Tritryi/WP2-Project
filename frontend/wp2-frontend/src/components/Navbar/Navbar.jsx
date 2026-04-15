@@ -11,8 +11,9 @@ function Navbar() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNa  v">
-            <ul className="navbar-nav ms-auto align-items-center gap-2">
+            <ul className="navbar-nav ms-auto align-items-center gap-4">
                 <Link className={`nav-item text-light ${styles.links}`} to="/game/1">Game test</Link>
+                <Link className={`nav-item text-light ${styles.links}`} to="/login">Login</Link>
                 <Link className='nav-item btn btn-light' to="/register">Register</Link>
             </ul>
         </div>
