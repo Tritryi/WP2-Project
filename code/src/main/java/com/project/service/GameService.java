@@ -31,4 +31,8 @@ public class GameService {
     public List<Game> findThreeByGenre(Genre genre) {
         return gameRepository.findTop3ByGenre(genre);
     }
+
+    public List<Game> findGamesByName(String keyword){
+        return gameRepository.findByNameContainingIgnoreCase(keyword);
+    }
 }

@@ -26,4 +26,9 @@ public class GameController {
     public List<Game> getThreeByGenre(@RequestParam(name = "genre") Genre genre) {
         return gameService.findThreeByGenre(genre);
     }
+
+    @GetMapping("/getByName")
+    public List<Game> getByName(@RequestParam(name = "keyword") String keyword) {
+        return gameService.findGamesByName(keyword);
+    }
 }
