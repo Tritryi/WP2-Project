@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getGamesByName } from '../../services/game.service';
+import styles from './Searchgame.module.css'
 
 function SearchGame(){
     const [searchTerm, setSearchTerm] = useState("");
@@ -15,9 +16,10 @@ function SearchGame(){
     return(
         <div className="w-100 mb-4">
             <div className="input-group shadow-sm">
+                
                 <input 
                     type="text" 
-                    className="form-control bg-secondary text-light border-dark shadow-none" 
+                    className={`form-control bg-secondary text-light border-dark shadow-none ${styles.placeholder}`}
                     placeholder="Search for a legendary game..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
