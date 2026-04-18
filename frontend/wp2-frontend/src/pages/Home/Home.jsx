@@ -3,6 +3,7 @@ import Gamecard from '../../components/Gamecard/Gamecard';
 import styles from './Home.module.css'
 import { use, useEffect, useState } from 'react';
 import { getThreeGames } from '../../services/game.service';
+import SearchGame from '../../components/SearchGame/SearchGame';
 
 function Home(){
     const [gamesRPG, setGameRPG] = useState([]);
@@ -31,16 +32,11 @@ function Home(){
                 Everything is here!
             </h3>
         </div>
-        <Link className="btn btn-dark btn-lg" to="/">Discover</Link>
+        <Link className="btn btn-dark btn-lg mb-5" to="/">Discover</Link>
 
-        <div className="row justify-content-center mt-4">
-            <div className="col-md-5">
-                <form action="" class="d-flex gap-2">
-                    <input type="search" className="form-control border-2" placeholder="Search"></input>
-                    <button type="submit" className="btn btn-outline-dark">Search</button>
-                </form>
-            </div>
-        </div>
+        
+        <SearchGame />
+
         <hr />
         <div className="mb-5">
             <h1><strong>Most popular</strong></h1>
