@@ -15,3 +15,8 @@ export async function loginUser(user){
     });
     return response;
 }
+
+export async function getUserByName(username){
+    const response = await fetch(`http://localhost:8080/api/user/getUserByName?username=${username}`);
+    return response.json();
+}

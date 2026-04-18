@@ -35,4 +35,9 @@ import org.springframework.web.bind.annotation.*;
                 return ResponseEntity.status(401).body("Invalid authentication");
             }
         }
+
+        @GetMapping("/getUserByName")
+        public User getUserByName(@RequestParam(name = "username") String username){
+            return userService.getByUsername(username);
+        }
     }

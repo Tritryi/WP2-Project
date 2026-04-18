@@ -24,6 +24,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/register").permitAll()
                         .requestMatchers("/api/user/login").permitAll()
                         .requestMatchers("/api/game/**").permitAll()
+                        .requestMatchers("/api/user/getUserByName").permitAll()
                         .anyRequest().authenticated()
                 );
 

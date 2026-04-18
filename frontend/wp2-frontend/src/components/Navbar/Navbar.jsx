@@ -2,12 +2,17 @@ import  { Link } from 'react-router-dom';
 import styles from './Navbar.module.css'
 function Navbar() {
     const isLogin = localStorage.getItem("token");
+    let user = null;
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
 
         window.location.href = "/login"
+    }
+    if (isLogin){
+        const userData = localStorage.getItem("user");
+        user = JSON.parse(userData);
     }
     return (
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
@@ -28,7 +33,7 @@ function Navbar() {
                     </>
                 ): (
                     <>
-                        <Link className={`nav-item text-light ${styles.links}`} to="/profile">My profile</Link>
+                        <Link className={`nav-item text-light ${styles.links}`} to={`profile/${user.username}`}>My profile</Link>
                         <button className='nav-item btn btn-outline-danger btn-sm'
                         onClick={handleLogout}
                         >Logout</button>
@@ -39,7 +44,7 @@ function Navbar() {
         </div>
     </div>
 </nav>
-  );
+);
 }
 
 export default Navbar;
