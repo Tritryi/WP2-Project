@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { updateUser } from "../../services/user.service";
 import SearchGame from '../../components/SearchGame';
-import SearchResult from "../../components/SearchResult";
+import Favorite from "../../components/Favorite";
 
 function Settings(){
     const [user, setUser] = useState(null);
@@ -63,9 +63,9 @@ function Settings(){
         setFavorites([...favorites, game]);
     }
 
-    const handleDelete = (() => {
-        alert("Test");
-    })
+    const handleDelete = (id) => {
+        setFavorites(favorites.filter(game => game.id != id));
+    };
 
     console.log(userLocal.favoriteGames);
 
@@ -130,10 +130,10 @@ function Settings(){
                 <h4>Favorite games</h4>
                 <h6>Current favorites</h6>
                 <div>
-                    {favorites.length > 0 && (
-                        userLocal.favoriteGames.map(game => (
+                    {favorites.length >= 0 && (
+                        favorites.map(game => (
                             <div className="">
-
+                                <Favorite key={game.id} name={game.name} imageLink="/images/jour8.webp" handleDelete={() => handleDelete(game.id)}/>
                             </div>
                             
                         ))

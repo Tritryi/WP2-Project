@@ -62,6 +62,8 @@ public class UserService {
                     }
                 }
                 existingUser.setFavoriteGames(favorites);
+            }else{
+                existingUser.getFavoriteGames().clear();
             }
 
             if (avatar != null && !avatar.isEmpty()) {
