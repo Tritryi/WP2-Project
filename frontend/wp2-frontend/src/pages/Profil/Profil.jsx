@@ -2,13 +2,14 @@ import styles from './Profil.module.css';
 import { getUserByName } from '../../services/user.service';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Avatar from '../../Avatar/Avatar';
 
 function Profil(){
     // const userString = localStorage.getItem("user");
     // const user = userString ? JSON.parse(userString) : null;
     const { username } = useParams();
     const [user, setUser]= useState(null);
-    const AVATAR_URL = "http://localhost:8080/uploads";
+    const AVATAR_URL = "http://localhost:8080/uploads/";
 
 
     useEffect(() => {
@@ -25,14 +26,12 @@ function Profil(){
     }
     let avatar = "";
     if(user.profilPicture != "" && user.profilPicture){
-        avatar = AVATAR_URL+"/"+user.profilPicture;
+        avatar = AVATAR_URL+user.profilPicture;
     }
     return(
         <div className="container">
             <div>
-                <img src={avatar}
-                className={`${styles.profilpic} rounded`} 
-                alt={user.username}/>
+                <Avatar imageLink={user.profilPicture ? avatar : AVATAR_URL+"noavatar.png"} owner={user.username} />
                 <h1>{user.username}</h1>
             </div>
             <div>

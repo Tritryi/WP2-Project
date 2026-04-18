@@ -1,8 +1,10 @@
 import  { Link } from 'react-router-dom';
 import styles from './Navbar.module.css'
+import Avatar from '../../Avatar/Avatar';
 function Navbar() {
     const isLogin = localStorage.getItem("token");
     let user = null;
+    const AVATAR_URL = "http://localhost:8080/uploads/"
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -33,6 +35,7 @@ function Navbar() {
                     </>
                 ): (
                     <>
+                            <Avatar imageLink={user.profilPicture ? AVATAR_URL+user.profilPicture : AVATAR_URL+"noavatar.png"} owner={user.username} size='40px'/>
                             <li className='nav-item dropdown'>
                                 <button type='button' 
                                 className='nav-link dropdown-toggle btn btn-secondary text-light border-0' 
