@@ -40,4 +40,9 @@ import org.springframework.web.bind.annotation.*;
         public User getUserByName(@RequestParam(name = "username") String username){
             return userService.getByUsername(username);
         }
+
+        @PutMapping("/updateUser")
+        public User updateUser(@RequestBody User user){
+            return userService.updateUser(user, user.getId());
+        }
     }

@@ -33,4 +33,15 @@ public class UserService {
     public User getByUsername(String username){
         return userRepository.findByUsername(username);
     }
+
+    public User updateUser(User incomingUser, Long currentId){
+        if (currentId == null) return null;
+        return userRepository.findById(currentId).map(existingUser -> {
+            if(incomingUser.getUsername() != null) existingUser.setUsername(incomingUser.getUsername());
+            if(incomingUser.getBio() != null) existingUser.setBio(incomingUser.getBio());
+            if(incomingUser.getComputerSpecs() != null) existingUser.setComputerSpecs(incomingUser.getComputerSpecs());
+
+            return userRepository.save(existingUser);
+        }).orElse(null);
+    }
 }

@@ -75,7 +75,6 @@ function Login(){
                     Sign In
                 </button>
 
-                {/* Petit bonus visuel pour la navigation */}
                 <p className="text-center mt-3 small text-muted">
                     Don't have an account? <Link className='text-primary' to="/register">Register</Link>
                 </p>
