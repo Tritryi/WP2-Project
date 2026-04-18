@@ -7,10 +7,12 @@ import com.project.entities.User;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-    @RestController
+@RestController
     @RequestMapping("/api/user")
     @CrossOrigin(origins = "http://localhost:5173")
     public class UserController {
@@ -41,8 +43,18 @@ import org.springframework.web.bind.annotation.*;
             return userService.getByUsername(username);
         }
 
-        @PutMapping("/updateUser")
-        public User updateUser(@RequestBody User user){
-            return userService.updateUser(user, user.getId());
+        @PutMapping(value = "/updateUser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+        public User updateUser(
+                @RequestParam("id") Long id,
+                @RequestParam("username") String username,
+                @RequestParam(value = "bio", required = false) String bio,
+                @RequestParam(value = "computerSpecs", required = false) String computerSpecs,
+                @RequestParam(value = "avatar", required = false)MultipartFile avatar
+        ){
+            User userUpdates = new User();
+            userUpdates.setUsername(username);
+            userUpdates.setBio(bio);
+            userUpdates.setComputerSpecs(computerSpecs);
+            return userService.updateUser(userUpdates, id, avatar);
         }
     }
