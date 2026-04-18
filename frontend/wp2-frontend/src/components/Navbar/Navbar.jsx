@@ -17,7 +17,7 @@ function Navbar() {
         user = JSON.parse(userData);
     }
     return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
     <div className="container-fluid">
         <Link className="navbar-brand fw-bold" to="/">ViGameList</Link>
 

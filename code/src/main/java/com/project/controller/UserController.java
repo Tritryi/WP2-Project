@@ -3,6 +3,7 @@ package com.project.controller;
 
 import com.project.config.AuthResponse;
 import com.project.config.JwUtils;
+import com.project.entities.Game;
 import com.project.entities.User;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
     @RequestMapping("/api/user")
@@ -49,12 +52,13 @@ import org.springframework.web.multipart.MultipartFile;
                 @RequestParam("username") String username,
                 @RequestParam(value = "bio", required = false) String bio,
                 @RequestParam(value = "computerSpecs", required = false) String computerSpecs,
-                @RequestParam(value = "avatar", required = false)MultipartFile avatar
+                @RequestParam(value = "avatar", required = false)MultipartFile avatar,
+                @RequestParam(value = "favoriteGamesIds", required = false) List<Long> favoriteGamesIds
         ){
             User userUpdates = new User();
             userUpdates.setUsername(username);
             userUpdates.setBio(bio);
             userUpdates.setComputerSpecs(computerSpecs);
-            return userService.updateUser(userUpdates, id, avatar);
+            return userService.updateUser(userUpdates, id, avatar, favoriteGamesIds);
         }
     }

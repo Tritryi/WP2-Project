@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import Gamecard from '../../components/Gamecard/Gamecard';
+import Gamecard from '../../components/Gamecard/';
 import styles from './Home.module.css'
 import { use, useEffect, useState } from 'react';
 import { getThreeGames } from '../../services/game.service';
@@ -26,9 +26,9 @@ function Home(){
     return(
         <>
         <main className="container">
-            <div class="pb-3">
+            <div className="pb-3">
             <h1><strong>Welcome to ViGameList!</strong></h1>
-            <h3 class="mr-5">Search for games, rate them, review them, look for informations you are struggling to find...
+            <h3 className="mr-5">Search for games, rate them, review them, look for informations you are struggling to find...
                 Everything is here!
             </h3>
         </div>
@@ -40,7 +40,7 @@ function Home(){
         <hr />
         <div className="mb-5">
             <h1><strong>Most popular</strong></h1>
-            <div class="d-flex flex-row gap-3">
+            <div className="d-flex flex-row gap-3">
                 <Gamecard game_id={1} width='45%'/>
                 <Gamecard game_id={2} width='45%'/>
                 <Gamecard game_id={3} width='45%'/>

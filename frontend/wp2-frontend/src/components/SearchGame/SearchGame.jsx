@@ -4,7 +4,7 @@ import { getGamesByName } from '../../services/game.service';
 import styles from './Searchgame.module.css'
 import SearchResult from '../SearchResult/SearchResult';
 
-function SearchGame(){
+function SearchGame({onItemClick}){
     const [searchTerm, setSearchTerm] = useState("");
     const [games, setGames] = useState(null);
 
@@ -38,7 +38,12 @@ function SearchGame(){
                 {games && (
                     <div className='d-flex flex-column'>
                         {games.map(game =>  (
-                            <SearchResult name={game.name} imageLink="/images/jour8.webp" id={game.id}/>
+                            <SearchResult 
+                            key={game.id}
+                            id={game.id}
+                            name={game.name}
+                            imageLink="/images/jour8.webp"
+                            onSelect={onItemClick ? onItemClick : null}/>
                         ))}
                     </div>
                 )}

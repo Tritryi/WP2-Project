@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { updateUser } from "../../services/user.service";
+import SearchGame from '../../components/SearchGame';
+import SearchResult from "../../components/SearchResult";
 
 function Settings(){
     const [user, setUser] = useState(null);
@@ -18,6 +20,7 @@ function Settings(){
     const [bio, setBio] = useState(userLocal.bio);
     const [compSpec, setCompSpec] = useState(userLocal.computerSpecs);
     const [avatar, setAvatar] = useState(null);
+    const [favorites, setFavorites] = useState(userLocal.favoriteGames || []);
 
     const handleChanges = async (e) => {
         e.preventDefault();
@@ -27,6 +30,9 @@ function Settings(){
         formData.append("username", username);
         formData.append("bio", bio);
         formData.append("computerSpecs", compSpec);
+        favorites.forEach(game => {
+            formData.append("favoriteGamesIds", game.id)
+        });
 
         if(avatar){
             formData.append("avatar", avatar);
@@ -46,6 +52,22 @@ function Settings(){
     const handleAvatarChange = (e) => {
         setAvatar(e.target.files[0]);
     }
+
+    const handleFavorite = (game) => {
+        if(favorites.length >3){
+            alert("Maximum of favorite games reached");
+            return;
+        }
+        console.log(favorites);
+
+        setFavorites([...favorites, game]);
+    }
+
+    const handleDelete = (() => {
+        alert("Test");
+    })
+
+    console.log(userLocal.favoriteGames);
 
 
     return(
@@ -104,6 +126,20 @@ function Settings(){
                         className="form-control border-secondary-subtle"
                     />
                 </div>
+
+                <h4>Favorite games</h4>
+                <h6>Current favorites</h6>
+                <div>
+                    {favorites.length > 0 && (
+                        userLocal.favoriteGames.map(game => (
+                            <div className="">
+
+                            </div>
+                            
+                        ))
+                    )}
+                </div>
+                <SearchGame onItemClick={handleFavorite}/>
                 
                 <button type="submit" className="btn btn-primary w-50 mt-3 py-2 fw-bold text-uppercase">
                     Change

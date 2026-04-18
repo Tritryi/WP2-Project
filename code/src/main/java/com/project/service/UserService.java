@@ -1,8 +1,10 @@
 package com.project.service;
 
 
+import com.project.entities.Game;
 import com.project.entities.Role;
 import com.project.entities.User;
+import com.project.repository.GameRepository;
 import com.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,11 +16,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final GameRepository gameRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final String uploadDir = "/home/tritri/Documents/WP2/ProjectImages/avatars/";
 
@@ -42,11 +47,22 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public User updateUser(User incomingUser, Long currentId, MultipartFile avatar){
+    public User updateUser(User incomingUser, Long currentId, MultipartFile avatar, List<Long> favoriteGamesIds){
         return userRepository.findById(currentId).map(existingUser -> {
             existingUser.setUsername(incomingUser.getUsername());
             existingUser.setBio(incomingUser.getBio());
             existingUser.setComputerSpecs(incomingUser.getComputerSpecs());
+
+            if(favoriteGamesIds != null){
+                List <Game> favorites = new ArrayList<>();
+                for(Long favoriteGameId : favoriteGamesIds){
+                    Game g =  gameRepository.findById(favoriteGameId).orElse(null);
+                    if(g != null){
+                        favorites.add(g);
+                    }
+                }
+                existingUser.setFavoriteGames(favorites);
+            }
 
             if (avatar != null && !avatar.isEmpty()) {
                 try{
