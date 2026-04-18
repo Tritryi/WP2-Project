@@ -33,6 +33,6 @@ public class GameService {
     }
 
     public List<Game> findGamesByName(String keyword){
-        return gameRepository.findByNameContainingIgnoreCase(keyword);
+        return gameRepository.findTop10ByNameContainingIgnoreCase(keyword);
     }
 }
