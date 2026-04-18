@@ -6,5 +6,10 @@ public enum Genre {
     MOBA,
     SOULLIKE,
     TPS,
-    NARRATIVE
+    NARRATIVE,
+    SIMULATOR,
+    MULTIPLAYER,
+    MANAGEMENT,
+    BUILDER,
+    SURVIVAL
 }

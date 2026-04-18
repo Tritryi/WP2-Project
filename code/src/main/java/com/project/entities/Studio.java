@@ -9,5 +9,6 @@ public enum Studio {
     FROM_SOFTWARE,
     BETHESDA,
     SANDFALL,
-    RIOT_GAMES
+    RIOT_GAMES,
+    INDY
 }
