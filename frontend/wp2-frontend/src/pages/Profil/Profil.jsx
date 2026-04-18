@@ -33,7 +33,6 @@ function Profil(){
             </div>
             <div>
                 <span>Game List</span>
-                <span>Settings</span>
             </div>
         </div>
     )

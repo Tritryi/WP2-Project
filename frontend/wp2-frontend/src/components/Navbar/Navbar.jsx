@@ -33,10 +33,22 @@ function Navbar() {
                     </>
                 ): (
                     <>
-                        <Link className={`nav-item text-light ${styles.links}`} to={`profile/${user.username}`}>My profile</Link>
-                        <button className='nav-item btn btn-outline-danger btn-sm'
-                        onClick={handleLogout}
-                        >Logout</button>
+                            <li className='nav-item dropdown'>
+                                <button type='button' 
+                                className='nav-link dropdown-toggle btn btn-secondary text-light border-0' 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false">
+                                    {user.username}
+                                </button>
+                                <ul className='dropdown-menu dropdown-menu-end shadow'>
+                                    <li><Link className={`dropdown-item ${styles.links}`} to={`/profile/${user.username}`}>My profile</Link></li>
+                                    <li><Link className={`dropdown-item ${styles.links}`} to="/settings">Settings</Link></li>
+                                    <li><button className='dropdown-item text-danger'
+                                        onClick={handleLogout}
+                                        >Logout</button></li>
+                                        
+                                </ul>
+                            </li>
                     </>
                 )}
                 
