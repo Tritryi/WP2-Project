@@ -1,6 +1,6 @@
 import  { Link } from 'react-router-dom';
 import styles from './Navbar.module.css'
-import Avatar from '../../Avatar/Avatar';
+import Avatar from '../Avatar/Avatar';
 function Navbar() {
     const isLogin = localStorage.getItem("token");
     let user = null;
