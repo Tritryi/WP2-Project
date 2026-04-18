@@ -10,6 +10,7 @@ import Footer from './assets/Footer/Footer';
 import Register from './pages/Register';
 import Login from './pages/Login'
 import Profil from './pages/Profil';
+import Settings from './pages/Settings';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
         <Route path='/login' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/profile/:username' element={<Profil />} />
+        <Route path='/settings' element={<Settings />} />
       </Routes>
       </main>
       <Footer />
