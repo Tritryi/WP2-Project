@@ -17,17 +17,22 @@ function Settings(){
     const [username, setUsername] = useState(userLocal.username);
     const [bio, setBio] = useState(userLocal.bio);
     const [compSpec, setCompSpec] = useState(userLocal.computerSpecs);
+    const [avatar, setAvatar] = useState(null);
 
     const handleChanges = async (e) => {
         e.preventDefault();
-        const newSettings = {
-            id : userLocal.id,
-            username : username,
-            bio: bio,
-            computerSpecs : compSpec
+
+        const formData = new FormData();
+        formData.append("id", userLocal.id);
+        formData.append("username", username);
+        formData.append("bio", bio);
+        formData.append("computerSpecs", compSpec);
+
+        if(avatar){
+            formData.append("avatar", avatar);
         }
 
-        const response = await updateUser(newSettings);
+        const response = await updateUser(formData);
         if(response.ok){
             const newData = await response.json();
             localStorage.setItem("user", JSON.stringify(newData));
@@ -36,6 +41,10 @@ function Settings(){
         }else{
             alert("Failed");
         }
+    }
+
+    const handleAvatarChange = (e) => {
+        setAvatar(e.target.files[0]);
     }
 
 
@@ -48,6 +57,18 @@ function Settings(){
 
             <form className="d-flex flex-column gap-3"
             onSubmit={handleChanges}>
+                {/* Avatar */}
+                <div className="d-flex flex-column">
+                    <label htmlFor="avatar" className="form-label small fw-bold">Profil picture</label>
+                    <input 
+                        type="file" 
+                        id="avatar"
+                        accept="image/*"
+                        onChange={handleAvatarChange}
+                        className="form-control border-secondary-subtle"
+                    />
+                    <div className="form-text small text-muted">Format: JPG, PNG (Max 2MB)</div>
+                </div>
                 
                 {/* Email */}
                 <div className="d-flex flex-column">

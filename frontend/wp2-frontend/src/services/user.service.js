@@ -24,9 +24,6 @@ export async function getUserByName(username){
 export async function updateUser(newSettings){
     return await fetch("http://localhost:8080/api/user/updateUser", {
         method: "PUT",
-        headers : {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newSettings)
+        body: newSettings
     });
 }

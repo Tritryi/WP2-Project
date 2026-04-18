@@ -8,27 +8,31 @@ function Profil(){
     // const user = userString ? JSON.parse(userString) : null;
     const { username } = useParams();
     const [user, setUser]= useState(null);
+    const AVATAR_URL = "http://localhost:8080/uploads";
+
 
     useEffect(() => {
         getUserByName(username).then(data => {
             setUser(data);
         });
         if (user) document.title = user.username;
-    }, [username, user]);
-
+    }, [username]);
     
-
     if (!user){
         return (
             <span className="visually-hidden">Loading...</span>  
         );
     }
+    let avatar = "";
+    if(user.profilPicture != "" && user.profilPicture){
+        avatar = AVATAR_URL+"/"+user.profilPicture;
+    }
     return(
         <div className="container">
             <div>
-                <img src="/images/jour8.webp"
+                <img src={avatar}
                 className={`${styles.profilpic} rounded`} 
-                alt="{user.username}" />
+                alt={user.username}/>
                 <h1>{user.username}</h1>
             </div>
             <div>
