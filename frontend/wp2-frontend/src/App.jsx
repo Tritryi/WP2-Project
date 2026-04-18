@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Login from './pages/Login'
 import Profil from './pages/Profil';
 import Settings from './pages/Settings';
+import Gameadder from './pages/Gameadder/';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,7 @@ function App() {
         <Route path='/register' element={<Register />}/>
         <Route path='/profile/:username' element={<Profil />} />
         <Route path='/settings' element={<Settings />} />
+        <Route path='/addGame' element={<Gameadder />} />
       </Routes>
       </main>
       <Footer />
