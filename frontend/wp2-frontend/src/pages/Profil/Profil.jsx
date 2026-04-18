@@ -3,6 +3,7 @@ import { getUserByName } from '../../services/user.service';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
+import Gamecard from '../../components/Gamecard/Gamecard';
 
 function Profil(){
     // const userString = localStorage.getItem("user");
@@ -44,8 +45,18 @@ function Profil(){
                     </p>
                 </div>
             </div>
-            <div className='bg-secondary'>
-                <span>Game List</span>
+            <div className='m-5 d-flex flex-column gap-5 '>
+                <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
+                    <h2 className='pb-3'>Favorite Games</h2>
+                </div>
+                <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
+                    <h2 className='pb-3'>Favorite Games</h2>
+                    <div className='d-flex gap-2 justify-content-around'>
+                        {user.favoriteGames.map(game => (
+                        <Gamecard key={game.id} game_id={game.id} width='40%'/>
+                    ))}
+                    </div>
+                </div>
             </div>
         </div>
     )
