@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { updateUser } from "../../services/user.service";
 import SearchGame from '../../components/SearchGame';
 import Favorite from "../../components/Favorite";
+import Avatar from "../../components/Avatar/Avatar";
 
 function Settings(){
     const [user, setUser] = useState(null);
@@ -20,6 +21,8 @@ function Settings(){
     const [bio, setBio] = useState(userLocal.bio);
     const [compSpec, setCompSpec] = useState(userLocal.computerSpecs);
     const [avatar, setAvatar] = useState(null);
+    const [preview, setPreview] = useState(null);
+
     const [favorites, setFavorites] = useState(userLocal.favoriteGames || []);
 
     const handleChanges = async (e) => {
@@ -50,7 +53,11 @@ function Settings(){
     }
 
     const handleAvatarChange = (e) => {
-        setAvatar(e.target.files[0]);
+        const file = e.target.files[0];
+        if(file){
+            setAvatar(file);
+            setPreview(URL.createObjectURL(file));
+        }
     }
 
     const handleFavorite = (game) => {
@@ -80,8 +87,17 @@ function Settings(){
             <form className="d-flex flex-column gap-3"
             onSubmit={handleChanges}>
                 {/* Avatar */}
+                <div className="d-flex flex-column align-items-center mb-3">
+                    <label className="form-label small fw-bold w-100">Profile Picture</label>
+                    
+                    <div className="position-relative">
+                        <Avatar imageLink={preview ? preview : (userLocal.profilPicture ? `http://localhost:8080/uploads/avatars/${userLocal.profilPicture}` : "/images/noavatar.png")}
+                        owner={userLocal.username} size="100px"/>
+                    </div>
+            </div>
                 <div className="d-flex flex-column">
                     <label htmlFor="avatar" className="form-label small fw-bold">Profil picture</label>
+                    
                     <input 
                         type="file" 
                         id="avatar"

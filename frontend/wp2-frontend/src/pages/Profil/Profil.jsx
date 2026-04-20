@@ -33,15 +33,15 @@ function Profil(){
             <div className='d-flex flex-column gap-5'>
                 <div className='d-flex align-items-end gap-5'>
                     <Avatar imageLink={user.profilPicture ? avatar : AVATAR_URL+"noavatar.png"} owner={user.username} />
-                    <h1 className=''>{user.username}</h1>
+                    <h1 className='border border-primary bg-secondary px-4 py-1 rounded shadow-lg text-light'>{user.username}</h1>
                 </div>
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm '>
-                    <p>{user.bio}</p>
+                    <p>{user.bio && user.bio != "null" ? user.bio : "Not specified"}</p>
                 </div>
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm '>
                     <p>
                         Computer Specs : <br /> <br />
-                        {user.computerSpecs}
+                        {user.computerSpecs && user.computerSpecs != "null" ? user.computerSpecs : "Not specified"}
                     </p>
                 </div>
             </div>
