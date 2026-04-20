@@ -4,7 +4,7 @@ import Avatar from '../Avatar/Avatar';
 function Navbar() {
     const isLogin = localStorage.getItem("token");
     let user = null;
-    const AVATAR_URL = "http://localhost:8080/uploads/"
+    const AVATAR_URL = "http://localhost:8080/uploads/avatars/"
 
     const handleLogout = () => {
         localStorage.removeItem("token");
