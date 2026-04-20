@@ -13,6 +13,7 @@ function Gameadder(){
     const [fail, setFail] = useState("");
 
     const [name, setName] = useState("");
+    const [gameImage, setGameImage] = useState(null);
     const [synopsis, setSynopsis] = useState("");
     const [studio, setStudio] = useState("");
     const [timeToFinish, setTimeToFinish]= useState(0);
@@ -32,6 +33,10 @@ function Gameadder(){
         }
     }
 
+    const handleImageChange = (e) => {
+        setGameImage(e.target.files[0]);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -44,7 +49,9 @@ function Gameadder(){
         genres.forEach(g => {
             formData.append("genres", g);
         });
-        console.log(formData);
+        if (gameImage){
+            formData.append("imageFile", gameImage);
+        }
 
         const response = await addGame(formData);
         if(response.ok){
@@ -82,6 +89,19 @@ function Gameadder(){
                         onChange={(e) => setName(e.target.value)}
                         className="form-control border-secondary-subtle"
                     />
+                </div>
+
+                {/* Illustration */}
+                <div className="d-flex flex-column">
+                    <label htmlFor="gameImage" className="form-label small fw-bold">Profil picture</label>
+                    <input 
+                        type="file" 
+                        id="gameImage"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="form-control border-secondary-subtle"
+                    />
+                    <div className="form-text small text-muted">Format: JPG, PNG (Max 2MB)</div>
                 </div>
 
                 {/* Synopsis */}

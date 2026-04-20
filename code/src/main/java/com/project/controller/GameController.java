@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,7 +35,9 @@ public class GameController {
     }
 
     @PostMapping(value = "/addGame", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Game addGame(@ModelAttribute Game game) {
-        return gameService.save(game);
+    public Game addGame(
+            @ModelAttribute Game game,
+            @RequestParam(value = "imageFile", required = false)MultipartFile image) {
+        return gameService.save(game, image);
     }
 }

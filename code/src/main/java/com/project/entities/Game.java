@@ -22,6 +22,7 @@ public class Game {
 
     private String name;
     private String synopsis;
+    private String illustration;
 
     @Enumerated(EnumType.STRING)
     private Studio studio;

@@ -10,7 +10,7 @@ function Profil(){
     // const user = userString ? JSON.parse(userString) : null;
     const { username } = useParams();
     const [user, setUser]= useState(null);
-    const AVATAR_URL = "http://localhost:8080/uploads/";
+    const AVATAR_URL = "http://localhost:8080/uploads/avatars/";
 
     useEffect(() => {
         getUserByName(username).then(data => {

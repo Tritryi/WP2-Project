@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOneGame } from '../../services/game.service.js';
 import styles from './Game.module.css'
+import Avatar from '../../components/Avatar/Avatar.jsx';
 
 function Game(){
     const [game, setGame] = useState(null);
     const { id } = useParams();
+    const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/"
 
         useEffect (() => {
             getOneGame(id).then(data => {
@@ -32,12 +34,8 @@ function Game(){
         <div className='container mt-5 d-flex align-items-start gap-5 mb-5 p-5 bg-white '>
         
         <div className='d-flex flex-column align-items-center gap-4' style={{ minWidth: '300px' }}>
-            <img 
-                src="/images/jour8.webp" 
-                alt={game.name} 
-                className={`${styles.img} img-fluid rounded-4 shadow-lg`} 
-            />
-            <button className='btn btn-primary w-25 py-3 fw-bold text-uppercase shadow-sm'>
+            <Avatar imageLink={ILLUSTRATION_URL+game.illustration} owner={game.name} size='300px'/>
+            <button className='btn btn-primary w-50 py-3 fw-bold text-uppercase shadow-sm'>
                 Add to list
             </button>
         </div>
