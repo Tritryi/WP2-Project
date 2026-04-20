@@ -5,6 +5,7 @@ import com.project.entities.Game;
 import com.project.entities.Genre;
 import com.project.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,5 +31,10 @@ public class GameController {
     @GetMapping("/getByName")
     public List<Game> getByName(@RequestParam(name = "keyword") String keyword) {
         return gameService.findGamesByName(keyword);
+    }
+
+    @PostMapping(value = "/addGame", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Game addGame(@ModelAttribute Game game) {
+        return gameService.save(game);
     }
 }

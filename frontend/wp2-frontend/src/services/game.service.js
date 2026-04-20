@@ -12,3 +12,11 @@ export async function getGamesByName(keyword){
     const response = await fetch(`http://localhost:8080/api/game/getByName?keyword=${keyword}`);
     return response.json();
 }
+
+export async function addGame(game){
+    const response = await fetch("http://localhost:8080/api/game/addGame", {
+        method: "POST",
+        body: game
+    });
+    return response;
+}
