@@ -5,3 +5,8 @@ export async function addReview(review){
     });
     return response;
 }
+
+export async function getReviewsOnGame(gameId){
+    const response = await fetch(`http://localhost:8080/api/review/getByGame?gameId=${gameId}`);
+    return response.json();
+}

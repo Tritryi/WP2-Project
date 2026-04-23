@@ -1,18 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOneGame } from '../../services/game.service.js';
 import styles from './Game.module.css'
 import Avatar from '../../components/Avatar/Avatar.jsx';
 import Popup from '../../components/Popup/Popup.jsx';
+import { getReviewsOnGame } from '../../services/review.service.js';
 
 function Game(){
     const [game, setGame] = useState(null);
     const { id } = useParams();
-    const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/"
+    const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/";
+    const AVATAR_URL = "http://localhost:8080/uploads/avatars/";
     const [isOpen, setIsOpen] = useState(false);
 
     const userData = localStorage.getItem("user");
     const user = userData ? JSON.parse(userData) : null;
+
+    const [reviews, setReviews] = useState([]);
 
     const canReview = user !== null;
     
@@ -21,6 +25,13 @@ function Game(){
             getOneGame(id).then(data => {
                 setGame(data);
             });
+        }, [id]);
+
+        useEffect(() => {
+            getReviewsOnGame(id).then(data => {
+                setReviews(data);
+                console.log(data);
+            })
         }, [id]);
 
         useEffect(() => {
@@ -90,6 +101,17 @@ function Game(){
                 </ul>
             </div>
         </div>
+    </div>
+
+    <div>
+        {
+            reviews != null && reviews.length > 0 && (
+                reviews.map(r => (
+                    
+                    <p>{r.comment}{r.author.username}</p>
+                ))
+            )
+        }
     </div>
     </div>
     

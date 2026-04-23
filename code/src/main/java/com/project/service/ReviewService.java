@@ -3,6 +3,7 @@ package com.project.service;
 
 import com.project.entities.Game;
 import com.project.entities.Review;
+import com.project.entities.ReviewProjection;
 import com.project.entities.User;
 import com.project.repository.GameRepository;
 import com.project.repository.ReviewRepository;
@@ -29,7 +30,7 @@ public class ReviewService {
         return  reviewRepository.save(review);
     }
 
-    public List<Review> findByGameId(Long gameId){
+    public List<ReviewProjection> findByGameId(Long gameId){
         return reviewRepository.findByGameId(gameId);
     }
 }
