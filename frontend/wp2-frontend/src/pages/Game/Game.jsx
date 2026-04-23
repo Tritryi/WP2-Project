@@ -17,7 +17,7 @@ function Game(){
 
         useEffect(() => {
             if(game){
-                document.title = game.name;
+                document.title = game.name+" • ViGameList";
             }
 
             return () => {
@@ -51,7 +51,7 @@ function Game(){
                 <strong className="text-primary">Studio:</strong> {game.studio}
             </h3>
             <h3 className='h6 text-muted mb-2'>
-                <strong className="text-primary">Duration:</strong> {game.averageTimeToFinish} hours
+                <strong className="text-primary">Average duration:</strong> {game.averageTimeToFinish} hours
             </h3>
             <h3 className='h6 text-muted mb-0'>
                 <strong className="text-primary">Engine:</strong> {game.engine}
