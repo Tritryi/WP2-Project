@@ -27,6 +27,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/getUserByName").permitAll()
                         .requestMatchers("/api/user/updateUser").permitAll()
                         .requestMatchers("/uploads/**").permitAll()
+                        .requestMatchers("/api/review/**").permitAll()
                         .anyRequest().authenticated()
                 );
 

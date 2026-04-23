@@ -22,6 +22,9 @@ public class Review {
     @ManyToOne
     private Game game;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     private String comment;
     private int grade;
 }
