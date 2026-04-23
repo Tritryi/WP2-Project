@@ -5,12 +5,15 @@ import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
 import Gamecard from '../../components/Gamecard/Gamecard';
 
+import Popup from '../../components/Popup';
+
 function Profil(){
     // const userString = localStorage.getItem("user");
     // const user = userString ? JSON.parse(userString) : null;
     const { username } = useParams();
     const [user, setUser]= useState(null);
     const AVATAR_URL = "http://localhost:8080/uploads/avatars/";
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         getUserByName(username).then(data => {
@@ -58,6 +61,11 @@ function Profil(){
                     </div>
                 </div>
             </div>
+
+            <button onClick={()=> setIsOpen(true)}>Open popup</button>
+            <Popup isOpen={isOpen} onClose={() => setIsOpen(false)}>
+                <p>Hello it works</p>
+            </Popup>
         </div>
     )
 }
