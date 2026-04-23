@@ -13,7 +13,6 @@ function Profil(){
     const { username } = useParams();
     const [user, setUser]= useState(null);
     const AVATAR_URL = "http://localhost:8080/uploads/avatars/";
-    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         getUserByName(username).then(data => {
@@ -62,10 +61,7 @@ function Profil(){
                 </div>
             </div>
 
-            <button onClick={()=> setIsOpen(true)}>Open popup</button>
-            <Popup isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <p>Hello it works</p>
-            </Popup>
+            
         </div>
     )
 }

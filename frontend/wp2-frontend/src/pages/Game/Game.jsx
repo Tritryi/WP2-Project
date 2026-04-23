@@ -3,11 +3,19 @@ import { useParams } from 'react-router-dom';
 import { getOneGame } from '../../services/game.service.js';
 import styles from './Game.module.css'
 import Avatar from '../../components/Avatar/Avatar.jsx';
+import Popup from '../../components/Popup/Popup.jsx';
 
 function Game(){
     const [game, setGame] = useState(null);
     const { id } = useParams();
     const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/"
+    const [isOpen, setIsOpen] = useState(false);
+
+    const userData = localStorage.getItem("user");
+    const user = userData ? JSON.parse(userData) : null;
+
+    const canReview = user !== null;
+    
 
         useEffect (() => {
             getOneGame(id).then(data => {
@@ -35,9 +43,18 @@ function Game(){
         
         <div className='d-flex flex-column align-items-center gap-4' style={{ minWidth: '300px' }}>
             <Avatar imageLink={ILLUSTRATION_URL+game.illustration} owner={game.name} size='300px'/>
-            <button className='btn btn-primary w-50 py-3 fw-bold text-uppercase shadow-sm'>
+            
+            {canReview &&(
+                <>
+            <button className='btn btn-primary w-50 py-3 fw-bold text-uppercase shadow-sm' onClick={() => setIsOpen(true)}>
                 Add to list
             </button>
+            <Popup isOpen={isOpen} onClose={() => setIsOpen(false)} game={game} user={user}/>
+
+                </>
+            )}
+                
+            
         </div>
 
         <div className="flex-grow-1">
