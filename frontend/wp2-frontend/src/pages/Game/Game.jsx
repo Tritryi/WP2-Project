@@ -5,6 +5,7 @@ import styles from './Game.module.css'
 import Avatar from '../../components/Avatar/Avatar.jsx';
 import Popup from '../../components/Popup/Popup.jsx';
 import { getReviewsOnGame } from '../../services/review.service.js';
+import Review from '../../components/Review/Review.jsx';
 
 function Game(){
     const [game, setGame] = useState(null);
@@ -49,71 +50,69 @@ function Game(){
         }
 
     return (
-    <div className='container rounded-4 border border-1 border-dark mt-3'>
-        <div className='container mt-5 d-flex align-items-start gap-5 mb-5 p-5 bg-white '>
-        
-        <div className='d-flex flex-column align-items-center gap-4' style={{ minWidth: '300px' }}>
-            <Avatar imageLink={ILLUSTRATION_URL+game.illustration} owner={game.name} size='300px'/>
-            
-            {canReview &&(
+    <div className='container my-5'> 
+    
+    {/* General game infos */}
+    <div className='row bg-white p-5 rounded-4 border shadow-sm mb-4 g-5'>
+        <div className='col-md-4 d-flex flex-column align-items-center gap-4'>
+            <Avatar imageLink={ILLUSTRATION_URL + game.illustration} owner={game.name} size='300px'/>
+            {canReview && (
                 <>
-            <button className='btn btn-primary w-50 py-3 fw-bold text-uppercase shadow-sm' onClick={() => setIsOpen(true)}>
-                Add to list
-            </button>
-            <Popup isOpen={isOpen} onClose={() => setIsOpen(false)} game={game} user={user}/>
-
+                    <button className='btn btn-primary w-100 py-3 fw-bold text-uppercase shadow-sm' onClick={() => setIsOpen(true)}>
+                        Add to list
+                    </button>
+                    <Popup isOpen={isOpen} onClose={() => setIsOpen(false)} game={game} user={user}/>
                 </>
             )}
-                
-            
         </div>
 
-        <div className="flex-grow-1">
-            <h1 className='display-4 fw-black text-dark mb-3'>{game.name}</h1>
-            
-            <p className='lead text-secondary mb-4 lh-base'>{game.synopsis}</p>
-            
+        <div className="col-md-8">
+            <h1 className='display-4 fw-bold text-dark mb-3'>{game.name}</h1>
+            <p className='lead text-secondary mb-4'>{game.synopsis}</p>
             <hr className="my-4 opacity-50" />
-            
-            <h3 className='h6 text-muted mb-2'>
-                <strong className="text-primary">Studio:</strong> {game.studio}
-            </h3>
-            <h3 className='h6 text-muted mb-2'>
-                <strong className="text-primary">Average duration:</strong> {game.averageTimeToFinish} hours
-            </h3>
-            <h3 className='h6 text-muted mb-0'>
-                <strong className="text-primary">Engine:</strong> {game.engine}
-            </h3>
-        </div>
-        
-    </div>
-
-    <div className='container mt-5 d-flex align-items-start gap-5 mb-5 p-5 bg-white'>
-        <div>
-            <h1>Genres</h1>
-            <div className='d-flex flex-column'>
-                <ul className='list-group'>
-                {
-                    game.genres.map(genre => (
-                        <li className='list-group-item list-group-item-secondary'>{genre}</li>
-                    ))
-                }
-                </ul>
+            <div className="d-flex flex-wrap gap-4">
+                <h3 className='h6 text-muted'><strong className="text-primary">Studio:</strong> {game.studio}</h3>
+                <h3 className='h6 text-muted'><strong className="text-primary">Duration:</strong> {game.averageTimeToFinish}h</h3>
+                <h3 className='h6 text-muted'><strong className="text-primary">Engine:</strong> {game.engine}</h3>
             </div>
         </div>
     </div>
 
-    <div>
-        {
-            reviews != null && reviews.length > 0 && (
-                reviews.map(r => (
-                    
-                    <p>{r.comment}{r.author.username}</p>
-                ))
-            )
-        }
+    {/* Genres and Reviews */}
+    <div className='row g-4'>
+        {/* Genres on the left */}
+        <div className='col-lg-4'>
+            <div className='bg-white p-4 rounded-4 border shadow-sm h-100'>
+                <h2 className='h4 mb-3 border-bottom pb-2'>Genres</h2>
+                <div className='d-flex flex-wrap gap-2'>
+                    {game.genres.map((genre, index) => (
+                        <span key={index} className='badge bg-secondary p-2'>{genre}</span>
+                    ))}
+                </div>
+            </div>
+        </div>
+
+        {/* Reviews on the right */}
+        <div className='col-lg-8'>
+            <div className='bg-white p-4 rounded-4 border shadow-sm'>
+                <h2 className='h4 mb-4 border-bottom pb-2'>Community Reviews</h2>
+                {reviews != null && reviews.length > 0 ? (
+                    reviews.map(r => (
+                        <Review 
+                            key={r.id} 
+                            comment={r.comment} 
+                            grade={r.grade} 
+                            author={r.author.username} 
+                            author_avatar={AVATAR_URL + r.author.profilPicture}
+                        />
+                    ))
+                ) : (
+                    <p className="text-muted italic">No reviews yet. Be the first to review!</p>
+                )}
+            </div>
+        </div>
     </div>
-    </div>
+</div>
     
 
     
