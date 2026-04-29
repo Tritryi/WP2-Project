@@ -1,6 +1,6 @@
 
 import styles from './GameList.module.css'
-function GameList({gameName, gameImage, gameId, grade}){
+function GameList({gameName, gameImage, gameId, grade, status}){
     const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/";
     
     return(
@@ -24,12 +24,18 @@ function GameList({gameName, gameImage, gameId, grade}){
                         <strong>{gameName}</strong>
                     </h6>
                 </a>
+
                 
                 
                 <small style={{ color: '#f568db', fontWeight: 'bold' }}>
                     {grade} / 10
                 </small>
             </div>
+            <span className="position-absolute top-0 end-0 m-2 badge rounded-pill bg-dark shadow-sm" 
+                style={{ border: '1px solid #f568db', fontSize: '0.7rem' }}>
+                {status}
+            </span>
+
         </div>
     )
 }

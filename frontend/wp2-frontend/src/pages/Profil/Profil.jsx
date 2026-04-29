@@ -123,7 +123,7 @@ function Profil(){
                         <div className='d-flex gap-2 justify-content-around'>
                         {
                             userReviews.map(r => (
-                                <GameList key={r.id} gameName={r.game.name} gameImage={r.game.illustration} gameId={r.game.id} grade={r.grade}/>
+                                <GameList key={r.id} gameName={r.game.name} gameImage={r.game.illustration} gameId={r.game.id} grade={r.grade} status={r.status}/>
                             ))
                         }
 

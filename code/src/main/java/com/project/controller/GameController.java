@@ -40,4 +40,9 @@ public class GameController {
             @RequestParam(value = "imageFile", required = false)MultipartFile image) {
         return gameService.save(game, image);
     }
+
+    @DeleteMapping("/deleteGame")
+    public void deleteGame(@RequestParam(name = "gameId") Long id) {
+        gameService.deleteById(id);
+    }
 }

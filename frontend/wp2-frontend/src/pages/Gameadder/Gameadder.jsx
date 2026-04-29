@@ -3,6 +3,8 @@ import { addGame } from "../../services/game.service";
 import SearchGame from "../../components/SearchGame";
 import Favorite from "../../components/Favorite";
 
+import { deleteGame } from "../../services/game.service";
+
 function Gameadder(){
     document.title = "Add a game";
     const userData = localStorage.getItem("user");
@@ -72,6 +74,8 @@ function Gameadder(){
     }
 
     const  [selectedGame, setSelectedGame] = useState(null);
+    const [searchKey, setSearchKey] = useState(0);
+
     const handleSelectGame = (gameData) => {
         setSelectedGame(gameData);
         console.log(gameData);
@@ -82,8 +86,10 @@ function Gameadder(){
         const confirm = window.confirm(`Are you sure you want to delete ${selectedGame.name} from database?`);
         if(confirm){
             try{
-                console.log("Deleted game");
+                await deleteGame(selectedGame.id);
                 setSuccess("Game deleted successfully");
+                setSelectedGame(null);
+                setSearchKey(prev => prev +1);
             }catch(err){
                 console.log(err);
             }
@@ -229,7 +235,7 @@ function Gameadder(){
             <h2 className="text-center mb-4 fw-bold">Delete/Update a Game</h2>
 
                 
-                <SearchGame onItemClick={handleSelectGame}/>
+                <SearchGame key={searchKey} onItemClick={handleSelectGame}/>
 
                 {
                     selectedGame && (

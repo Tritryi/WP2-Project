@@ -36,7 +36,7 @@ public class Game {
     @Enumerated(EnumType.STRING)
     private GraphicEngine engine;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 }

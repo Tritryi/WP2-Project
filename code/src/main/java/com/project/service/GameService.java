@@ -62,4 +62,8 @@ public class GameService {
     public List<Game> findGamesByName(String keyword){
         return gameRepository.findTop10ByNameContainingIgnoreCase(keyword);
     }
+
+    public void deleteById(Long id){
+        gameRepository.deleteById(id);
+    }
 }
