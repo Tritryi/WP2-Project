@@ -7,6 +7,8 @@ import Avatar from "../../components/Avatar/Avatar";
 
 function Settings(){
     const [user, setUser] = useState(null);
+    const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/";
+
     
     const userData = localStorage.getItem("user");
     const userLocal = JSON.parse(userData);
@@ -149,7 +151,7 @@ function Settings(){
                     {favorites.length >= 0 && (
                         favorites.map(game => (
                             <div className="">
-                                <Favorite key={game.id} name={game.name} imageLink="/images/jour8.webp" handleDelete={() => handleDelete(game.id)}/>
+                                <Favorite key={game.id} name={game.name} imageLink={ILLUSTRATION_URL+game.illustration} handleDelete={() => handleDelete(game.id)}/>
                             </div>
                             
                         ))

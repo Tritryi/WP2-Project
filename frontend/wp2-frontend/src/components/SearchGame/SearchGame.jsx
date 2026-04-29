@@ -7,6 +7,8 @@ import SearchResult from '../SearchResult/SearchResult';
 function SearchGame({onItemClick}){
     const [searchTerm, setSearchTerm] = useState("");
     const [games, setGames] = useState(null);
+    const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/";
+
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -42,7 +44,7 @@ function SearchGame({onItemClick}){
                             key={game.id}
                             id={game.id}
                             name={game.name}
-                            imageLink="/images/jour8.webp"
+                            imageLink={ILLUSTRATION_URL+game.illustration}
                             onSelect={onItemClick ? onItemClick : null}/>
                         ))}
                     </div>
