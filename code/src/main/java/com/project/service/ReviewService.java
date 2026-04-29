@@ -1,10 +1,7 @@
 package com.project.service;
 
 
-import com.project.entities.Game;
-import com.project.entities.Review;
-import com.project.entities.ReviewProjection;
-import com.project.entities.User;
+import com.project.entities.*;
 import com.project.repository.GameRepository;
 import com.project.repository.ReviewRepository;
 import com.project.repository.UserRepository;
@@ -32,5 +29,9 @@ public class ReviewService {
 
     public List<ReviewProjection> findByGameId(Long gameId){
         return reviewRepository.findByGameId(gameId);
+    }
+
+    public List<GameListProjection> findByAuthorId(Long authorId){
+        return reviewRepository.findByAuthorIdOrderByGradeDesc(authorId);
     }
 }

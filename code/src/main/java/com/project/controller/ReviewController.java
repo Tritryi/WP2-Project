@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.entities.GameListProjection;
 import com.project.entities.Review;
 import com.project.entities.ReviewProjection;
 import com.project.entities.Status;
@@ -34,5 +35,10 @@ public class ReviewController {
     @GetMapping("/getByGame")
     public List<ReviewProjection> getByGame(@RequestParam(name = "gameId") Long gameId){
         return reviewService.findByGameId(gameId);
+    }
+
+    @GetMapping("/getUserReviews")
+    public List<GameListProjection> getUserGames(@RequestParam(name = "userId") Long userId){
+        return reviewService.findByAuthorId(userId);
     }
 }
