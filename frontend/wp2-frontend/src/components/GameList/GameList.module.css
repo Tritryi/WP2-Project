@@ -1,0 +1,9 @@
+.linkToGame h6{
+    transition: color 0.1s ease-in-out; 
+}
+.linkToGame:hover{
+    color: #4d57df !important;
+}
+.linkToGame:hover h6{
+    color: #4d57df !important;
+}
