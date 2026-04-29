@@ -9,6 +9,7 @@ import Popup from '../../components/Popup';
 
 import { getUserReviews } from '../../services/game.service';
 import GameList from '../../components/GameList/GameList';
+import ReviewProfile from '../../components/ReviewProfile/ReviewProfile';
 
 function Profil(){
     // const userString = localStorage.getItem("user");
@@ -17,9 +18,7 @@ function Profil(){
     const [user, setUser]= useState(null);
     const AVATAR_URL = "http://localhost:8080/uploads/avatars/";
 
-    const [profileShow, setProfileShow] = useState(true);
-    const [gameListShow, setGameListShow] = useState(false);
-    const [reviewsShow, setReviewsShow] = useState(false);
+    const [tabToShow, setTabToShow] = useState("profile");
 
     const [userReviews, setUserReviews] = useState([]);
 
@@ -39,6 +38,12 @@ function Profil(){
     let avatar = "";
     if(user.profilPicture != "" && user.profilPicture){
         avatar = AVATAR_URL+user.profilPicture;
+    }
+
+
+    const handleShowTab = (tab) => {
+        setTabToShow(tab);
+        if(tab == "games" || tab == "reviews") loadGameList();
     }
 
     async function loadGameList(){
@@ -65,22 +70,79 @@ function Profil(){
             </div>
             <div className='m-5 d-flex flex-column gap-5 '>
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm d-flex justify-content-around'>
-                    <h2 className='pb-3'>Profile</h2>
-                    <button type='button' onClick={loadGameList}>Game List</button>
-                    <h2 className='pb-3'>Reviews</h2>
-                </div>
+                    <button 
+                        type='button' 
+                        onClick={() => handleShowTab("profile")}
+                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "profile" ? "text-primary" : "text-light"}`}
+                    >
+                        Profile
+                    </button>
 
-                <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
-                    <h2 className='pb-3'>Statistics</h2>
-                    <div className='d-flex gap-2 justify-content-around'>
+                    <button 
+                        type='button' 
+                        onClick={() => handleShowTab("games")}
+                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "games" ? "text-primary" : "text-light"}`}
+                    >
+                        Game List
+                    </button>
+
+                    <button 
+                        type='button' 
+                        onClick={() => handleShowTab("reviews")}
+                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "reviews" ? "text-primary" : "text-light"}`}
+                    >
+                        Reviews
+                    </button>
+                </div>
+                
+                {
+                    /* Displaying profile statistics */
+                    tabToShow == "profile" && (
+                    <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
+                        <h2 className='pb-3'>Statistics</h2>
+                        <div className='d-flex gap-2 justify-content-around'>
+
+                        </div>
+                </div>
+                    )
+                }
+
+                {
+                    /* Dsplaying Game list */
+                    tabToShow == "games" && (
+                    <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
+                        <h2 className='pb-3'>GameList</h2>
+                        <div className='d-flex gap-2 justify-content-around'>
                         {
                             userReviews.map(r => (
-                                <GameList gameName={r.game.name} gameImage={r.game.illustration} gameId={r.game.id} grade={r.grade}/>
+                                <GameList key={r.id} gameName={r.game.name} gameImage={r.game.illustration} gameId={r.game.id} grade={r.grade}/>
                             ))
                         }
 
+                        </div>
                     </div>
-                </div>
+                    )
+                }
+
+                {
+                    /* Dsplaying Reviews list */
+                    tabToShow == "reviews" && (
+                    <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
+                        <h2 className='pb-3'>Reviews</h2>
+                        <div className='d-flex gap-2 justify-content-around'>
+                        {
+                            userReviews.map(r => (
+                                <ReviewProfile key={r.id} image={r.game.illustration} grade={r.grade} comment={r.comment}/>
+                            ))
+                        }
+
+                        </div>
+                    </div>
+                    )
+                }
+                
+                
+                
 
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                     <h2 className='pb-3'>Favorite Games</h2>
