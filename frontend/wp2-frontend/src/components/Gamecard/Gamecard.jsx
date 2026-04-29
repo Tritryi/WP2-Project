@@ -18,18 +18,18 @@ function Gamecard({game_id, width = '100%'}){
     }
 
     return (
-        <div className="d-flex flex-column align-items-center text-center">
+        <div className="d-flex flex-column align-items-center text-center h-100">
             <img 
-            className={`${styles.gameImage} rounded mb-2`} 
-            src={ILLUSTRATION_URL + game.illustration}
-            alt="Game Image"
-            style={{
-                width: width, 
-                height: width, 
-                objectFit: 'cover' // Empêche la déformation
-            }}
+                className={`${styles.gameImage} rounded mb-2`} 
+                src={ILLUSTRATION_URL + game.illustration}
+                alt="Game Image"
+                style={{
+                    width: width, 
+                    aspectRatio: '1 / 1',
+                    objectFit: 'cover'    
+                }}
             />
-            <h4>{game.name}</h4>
+            <h4 style={{ fontSize: '1rem', marginTop: 'auto' }}>{game.name}</h4>
         </div>
     )
 }

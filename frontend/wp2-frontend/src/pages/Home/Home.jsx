@@ -52,10 +52,10 @@ function Home(){
     <h2 className="mb-4 text-secondary">RPG Games</h2>
 
     <div className="d-flex justify-content-center">
-        <div className="d-flex flex-row justify-content-center gap-4 w-100">
+        <div className="d-flex flex-row justify-content-around gap-4 w-100">
             {
                 gamesRPG.map(game => (
-                    <Gamecard key={game.id} game_id={game.id} width='30%' />
+                    <Gamecard key={game.id} game_id={game.id} width='120px' />
                 ))
             }
         </div>
@@ -66,7 +66,7 @@ function Home(){
         <div className="d-flex flex-row justify-content-around w-100">
             {
                 gamesFPS.map(game => (
-                    <Gamecard key={game.id} game_id={game.id} width='30%' />
+                    <Gamecard key={game.id} game_id={game.id} width='120px' />
                 ))
             }
         </div>
