@@ -20,3 +20,8 @@ export async function addGame(game){
     });
     return response;
 }
+
+export async function getUserReviews(userId){
+    const response = await fetch(`http://localhost:8080/api/review/getUserReviews?userId=${userId}`);
+    return response.json();
+}

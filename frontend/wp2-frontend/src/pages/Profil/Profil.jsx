@@ -7,12 +7,22 @@ import Gamecard from '../../components/Gamecard/Gamecard';
 
 import Popup from '../../components/Popup';
 
+import { getUserReviews } from '../../services/game.service';
+import GameList from '../../components/GameList/GameList';
+
 function Profil(){
     // const userString = localStorage.getItem("user");
     // const user = userString ? JSON.parse(userString) : null;
     const { username } = useParams();
     const [user, setUser]= useState(null);
     const AVATAR_URL = "http://localhost:8080/uploads/avatars/";
+
+    const [profileShow, setProfileShow] = useState(true);
+    const [gameListShow, setGameListShow] = useState(false);
+    const [reviewsShow, setReviewsShow] = useState(false);
+
+    const [userReviews, setUserReviews] = useState([]);
+
 
     useEffect(() => {
         getUserByName(username).then(data => {
@@ -30,6 +40,12 @@ function Profil(){
     if(user.profilPicture != "" && user.profilPicture){
         avatar = AVATAR_URL+user.profilPicture;
     }
+
+    async function loadGameList(){
+        const data = await getUserReviews(user.id);
+        setUserReviews(data);
+    }
+
     return(
         <div className="container d-flex gap-5">
             <div className='d-flex flex-column gap-5'>
@@ -48,9 +64,24 @@ function Profil(){
                 </div>
             </div>
             <div className='m-5 d-flex flex-column gap-5 '>
-                <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
-                    <h2 className='pb-3'>Favorite Games</h2>
+                <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm d-flex justify-content-around'>
+                    <h2 className='pb-3'>Profile</h2>
+                    <button type='button' onClick={loadGameList}>Game List</button>
+                    <h2 className='pb-3'>Reviews</h2>
                 </div>
+
+                <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
+                    <h2 className='pb-3'>Statistics</h2>
+                    <div className='d-flex gap-2 justify-content-around'>
+                        {
+                            userReviews.map(r => (
+                                <GameList gameName={r.game.name} gameImage={r.game.illustration} gameId={r.game.id} grade={r.grade}/>
+                            ))
+                        }
+
+                    </div>
+                </div>
+
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                     <h2 className='pb-3'>Favorite Games</h2>
                     <div className='d-flex gap-2 justify-content-around'>
