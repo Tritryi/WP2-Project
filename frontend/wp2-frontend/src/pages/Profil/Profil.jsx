@@ -26,8 +26,14 @@ function Profil(){
     useEffect(() => {
         getUserByName(username).then(data => {
             setUser(data);
+
+            if (data && data.id){
+                document.title = data.username;
+                getUserReviews(data.id).then(reviews => {
+                    setUserReviews(reviews);
+                });
+            }
         });
-        if (user) document.title = user.username;
     }, [username]);
     
     if (!user){
@@ -43,14 +49,15 @@ function Profil(){
 
     const handleShowTab = (tab) => {
         setTabToShow(tab);
-        if(tab == "games" || tab == "reviews") loadGameList();
     }
 
     async function loadGameList(){
         const data = await getUserReviews(user.id);
         setUserReviews(data);
+        
     }
-
+    const totalGames = userReviews.length;
+    const totalReviews = userReviews.filter(r => r.comment && r.comment.trim() !== "").length;
     return(
         <div className="container d-flex gap-5">
             <div className='d-flex flex-column gap-5'>
@@ -101,7 +108,8 @@ function Profil(){
                     <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                         <h2 className='pb-3'>Statistics</h2>
                         <div className='d-flex gap-2 justify-content-around'>
-
+                            <h2>{totalGames}</h2>
+                            <h2>{totalReviews}</h2>
                         </div>
                 </div>
                     )
@@ -148,7 +156,7 @@ function Profil(){
                     <h2 className='pb-3'>Favorite Games</h2>
                     <div className='d-flex gap-2 justify-content-around'>
                         {user.favoriteGames.map(game => (
-                        <Gamecard key={game.id} game_id={game.id} width='40%'/>
+                        <Gamecard key={game.id} game_id={game.id} width='50%'/>
                     ))}
                     </div>
                 </div>

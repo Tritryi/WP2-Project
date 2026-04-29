@@ -4,6 +4,8 @@ import { getOneGame } from '../../services/game.service';
 
 function Gamecard({game_id, width = '100%'}){
     const [game, setGame] = useState(null);
+    const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/";
+
 
     useEffect (() => {
         getOneGame(game_id).then(data => {
@@ -17,11 +19,17 @@ function Gamecard({game_id, width = '100%'}){
 
     return (
         <div className="d-flex flex-column align-items-center text-center">
-                    <img className={`${styles.gameImage} rounded mb-2`} 
-                    src='/images/jour8.webp' 
-                    alt="Game Image"
-                    style={{width : width}}/>
-                    <h4>{game.name}</h4>
+            <img 
+            className={`${styles.gameImage} rounded mb-2`} 
+            src={ILLUSTRATION_URL + game.illustration}
+            alt="Game Image"
+            style={{
+                width: width, 
+                height: width, 
+                objectFit: 'cover' // Empêche la déformation
+            }}
+            />
+            <h4>{game.name}</h4>
         </div>
     )
 }
