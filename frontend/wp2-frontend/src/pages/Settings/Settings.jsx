@@ -151,7 +151,7 @@ function Settings(){
                     {favorites.length >= 0 && (
                         favorites.map(game => (
                             <div className="">
-                                <Favorite key={game.id} name={game.name} imageLink={ILLUSTRATION_URL+game.illustration} handleDelete={() => handleDelete(game.id)}/>
+                                <Favorite key={game.id} name={game.name} imageLink={ILLUSTRATION_URL+game.illustration} handleDelete={() => handleDelete(game.id)} showDelete={true}/>
                             </div>
                             
                         ))

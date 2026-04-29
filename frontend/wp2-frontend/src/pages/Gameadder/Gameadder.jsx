@@ -1,9 +1,13 @@
 import { use, useState } from "react";
 import { addGame } from "../../services/game.service";
+import SearchGame from "../../components/SearchGame";
+import Favorite from "../../components/Favorite";
 
 function Gameadder(){
     document.title = "Add a game";
     const userData = localStorage.getItem("user");
+    const ILLUSTRATION_URL = "http://localhost:8080/uploads/gameIllus/";
+
     const userLocal = JSON.parse(userData);
     if(userLocal.role != "ADMIN"){
         alert("You are not an admin");
@@ -67,9 +71,28 @@ function Gameadder(){
         }
     }
 
+    const  [selectedGame, setSelectedGame] = useState(null);
+    const handleSelectGame = (gameData) => {
+        setSelectedGame(gameData);
+        console.log(gameData);
+    }
+    const handleDelete = async () => {
+        if (!selectedGame) return;
+
+        const confirm = window.confirm(`Are you sure you want to delete ${selectedGame.name} from database?`);
+        if(confirm){
+            try{
+                console.log("Deleted game");
+                setSuccess("Game deleted successfully");
+            }catch(err){
+                console.log(err);
+            }
+        }
+    }
+
 
     return (
-        <div className="container flex-grow-1 d-flex justify-content-center align-items-center py-5">
+        <div className="container flex-grow-1 d-flex justify-content-center align-items-center py-5 gap-5">
         
         <div className="card shadow border-0 p-4" style={{ width: "100%", maxWidth: "400px" }}>
             
@@ -200,6 +223,48 @@ function Gameadder(){
 
             </form>
         </div>
+        
+        <div className="card shadow border-0 p-4" style={{ width: "100%", maxWidth: "400px" }}>
+            
+            <h2 className="text-center mb-4 fw-bold">Delete/Update a Game</h2>
+
+                
+                <SearchGame onItemClick={handleSelectGame}/>
+
+                {
+                    selectedGame && (
+                        <div>
+                            <Favorite name={selectedGame.name} imageLink={selectedGame.imageLink} handleDelete={null} showDelete={false}/>
+                            
+                            <button 
+                                onClick={() => setSelectedGame(null)}
+                                className={`btn btn-secondary w-100 mt-3 py-2 fw-bold text-uppercase`}
+                                >
+                                Unselect {selectedGame.name}
+                            </button>
+                        </div>
+                        
+                    )
+                }
+                <button 
+                    type="button" 
+                    onClick={handleDelete}
+                    disabled={!selectedGame} 
+                    className={`btn ${selectedGame ? 'btn-danger' : 'btn-secondary'} w-100 mt-3 py-2 fw-bold text-uppercase`}
+                    >
+                    {selectedGame ? `Delete ${selectedGame.name}` : "Select a game to delete"}
+                </button>
+                <button 
+                    type="button" 
+                    disabled={!selectedGame} 
+                    className={`btn ${selectedGame ? 'btn-warning' : 'btn-secondary'} w-100 mt-3 py-2 fw-bold text-uppercase`}
+                    >
+                    {selectedGame ? `Update ${selectedGame.name}` : "Select a game to update"}
+                </button>
+
+            
+        </div>
+        
     </div>
     )
 }
