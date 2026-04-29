@@ -28,7 +28,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNa  v">
             <ul className="navbar-nav ms-auto align-items-center gap-4">
                 {isLogin && user.role == "ADMIN" && (
-                    <Link className={`nav-item text-light ${styles.links}`} to="/addGame">Add a Game</Link>
+                    <Link className={`nav-item text-light ${styles.links}`} to="/addGame">Game Administration</Link>
                 )}
                 {!isLogin ? (
                     <>

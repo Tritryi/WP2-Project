@@ -23,7 +23,7 @@ function SearchGame({onItemClick}){
                 <input 
                     type="text" 
                     className={`form-control bg-secondary text-light border-dark shadow-none ${styles.placeholder}`}
-                    placeholder="Search for a legendary game..." 
+                    placeholder="Search for games..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />

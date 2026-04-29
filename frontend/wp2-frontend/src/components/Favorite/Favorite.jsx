@@ -1,4 +1,4 @@
-function Favorite({name, imageLink, handleDelete}){
+function Favorite({name, imageLink, handleDelete, showDelete}){
 
     return(
         <div className="d-flex justify-content-between bg-light d-flex align-items-center gap-3 p-2 text-dark border border-secondary rounded shadow-sm mb-2 w-100">
@@ -12,10 +12,13 @@ function Favorite({name, imageLink, handleDelete}){
             
             <h6 className="mb-0 fw-bold">{name}</h6>
             </div>
-        
-            <button type="button" className="btn" onClick={handleDelete}>
+            {
+                showDelete && (
+                    <button type="button" className="btn" onClick={handleDelete}>
                 ❌
             </button>
+                )
+            }
             
         </div>
     )
