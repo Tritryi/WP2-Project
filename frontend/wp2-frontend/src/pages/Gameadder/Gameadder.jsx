@@ -3,7 +3,7 @@ import { addGame } from "../../services/game.service";
 import SearchGame from "../../components/SearchGame";
 import Favorite from "../../components/Favorite";
 
-import { deleteGame } from "../../services/game.service";
+import { deleteGame, getOneGame, updateGame } from "../../services/game.service";
 
 function Gameadder(){
     document.title = "Add a game";
@@ -59,9 +59,17 @@ function Gameadder(){
             formData.append("imageFile", gameImage);
         }
 
-        const response = await addGame(formData);
+        let response;
+        if(isUpdating){
+            formData.append("id", selectedGame.id)
+            response = await updateGame(formData);
+        }else{
+            response = await addGame(formData);
+        }
+
+        
         if(response.ok){
-            setSuccess("Game added successfuly");
+            setSuccess(isUpdating ? "Game updated successfully" : "Game added successfuly");
             setTimeout(function() {
                 window.location.href = "/addGame"
             }, 2000);
@@ -76,10 +84,18 @@ function Gameadder(){
     const  [selectedGame, setSelectedGame] = useState(null);
     const [searchKey, setSearchKey] = useState(0);
 
-    const handleSelectGame = (gameData) => {
-        setSelectedGame(gameData);
-        console.log(gameData);
-    }
+    
+
+    const handleSelectGame = async (gameData) => {
+            try{
+                const fullGame = await getOneGame(gameData.id);
+                setSelectedGame(fullGame);
+                console.log(fullGame);
+            }catch(err){
+                console.log(err);
+            }
+        }
+
     const handleDelete = async () => {
         if (!selectedGame) return;
 
@@ -94,6 +110,28 @@ function Gameadder(){
                 console.log(err);
             }
         }
+    }
+
+    const [isUpdating, setIsUpdating] = useState(false);
+
+    const handleUpdatingMode = () => {
+        setIsUpdating(true);
+        console.log(selectedGame);
+        
+
+        setName(selectedGame.name);
+        setSynopsis(selectedGame.synopsis);
+        setStudio(selectedGame.studio);
+        setTimeToFinish(selectedGame.averageTimeToFinish)
+        setStudio(selectedGame.studio);
+        setGenres(selectedGame.genres);
+        setGameImage(selectedGame.illustration)
+    } 
+
+    const handleUnselect = () => {
+        setSelectedGame(null);
+        setIsUpdating(false);
+        setName("");
     }
 
 
@@ -223,8 +261,8 @@ function Gameadder(){
                 <div className='text-danger text-lg-center fw-bold animate__animated animate__fadeIn'>{fail}</div>
 
 
-                <button type="submit" className="btn btn-primary w-100 mt-3 py-2 fw-bold text-uppercase">
-                    Add game
+                <button type="submit" className={`btn ${isUpdating ? "btn-warning" : "btn-primary"}  w-100 mt-3 py-2 fw-bold text-uppercase`}>
+                    {(isUpdating && selectedGame)? `Update ${selectedGame.name}` : "Add Game"}
                 </button>
 
             </form>
@@ -240,10 +278,10 @@ function Gameadder(){
                 {
                     selectedGame && (
                         <div>
-                            <Favorite name={selectedGame.name} imageLink={selectedGame.imageLink} handleDelete={null} showDelete={false}/>
+                            <Favorite name={selectedGame.name} imageLink={ILLUSTRATION_URL+selectedGame.illustration} handleDelete={null} showDelete={false}/>
                             
                             <button 
-                                onClick={() => setSelectedGame(null)}
+                                onClick={handleUnselect}
                                 className={`btn btn-secondary w-100 mt-3 py-2 fw-bold text-uppercase`}
                                 >
                                 Unselect {selectedGame.name}
@@ -261,11 +299,12 @@ function Gameadder(){
                     {selectedGame ? `Delete ${selectedGame.name}` : "Select a game to delete"}
                 </button>
                 <button 
-                    type="button" 
+                    type="button"
+                    onClick={handleUpdatingMode}
                     disabled={!selectedGame} 
                     className={`btn ${selectedGame ? 'btn-warning' : 'btn-secondary'} w-100 mt-3 py-2 fw-bold text-uppercase`}
                     >
-                    {selectedGame ? `Update ${selectedGame.name}` : "Select a game to update"}
+                    {selectedGame ? `Edit ${selectedGame.name}` : "Select a game to update"}
                 </button>
 
             

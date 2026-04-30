@@ -21,6 +21,14 @@ export async function addGame(game){
     return response;
 }
 
+export async function updateGame(game){
+    const response = await fetch("http://localhost:8080/api/game/updateGame", {
+        method: "POST",
+        body: game
+    });
+    return response;
+}
+
 export async function getUserReviews(userId){
     const response = await fetch(`http://localhost:8080/api/review/getUserReviews?userId=${userId}`);
     return response.json();

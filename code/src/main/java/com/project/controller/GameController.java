@@ -41,6 +41,14 @@ public class GameController {
         return gameService.save(game, image);
     }
 
+    @PostMapping(value = "/updateGame")
+    public Game updateGame(
+            @ModelAttribute Game game,
+            @RequestParam(value = "imageFile", required = false)MultipartFile image
+    ){
+        return gameService.updateGame(game, image);
+    }
+
     @DeleteMapping("/deleteGame")
     public void deleteGame(@RequestParam(name = "gameId") Long id) {
         gameService.deleteById(id);

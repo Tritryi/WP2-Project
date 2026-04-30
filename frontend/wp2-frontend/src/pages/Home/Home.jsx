@@ -37,7 +37,7 @@ function Home(){
         
         <SearchGame />
 
-        <hr />
+        {/* <hr />
         <div className="mb-5">
             <h1><strong>Most popular</strong></h1>
             <div className="d-flex flex-row gap-3">
@@ -45,7 +45,7 @@ function Home(){
                 <Gamecard game_id={2} width='45%'/>
                 <Gamecard game_id={3} width='45%'/>
             </div>
-        </div>
+        </div> */}
         <hr />
     <div className="mt-5">
     <h1 className="text-center"><strong>Recommendations</strong></h1>

@@ -59,7 +59,7 @@ function Profil(){
     const totalGames = userReviews.length;
     const totalReviews = userReviews.filter(r => r.comment && r.comment.trim() !== "").length;
     return(
-        <div className="container d-flex gap-5">
+        <div className="container-fluid d-flex gap-5 justify-content-center">
             <div className='d-flex flex-column gap-5'>
                 <div className='d-flex align-items-end gap-5'>
                     <Avatar imageLink={user.profilPicture ? avatar : AVATAR_URL+"noavatar.png"} owner={user.username} />
@@ -75,7 +75,7 @@ function Profil(){
                     </p>
                 </div>
             </div>
-            <div className='m-5 d-flex flex-column gap-5 '>
+            <div className=' d-flex flex-column gap-5 '>
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm d-flex justify-content-around'>
                     <button 
                         type='button' 
@@ -154,9 +154,9 @@ function Profil(){
 
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                     <h2 className='pb-3'>Favorite Games</h2>
-                    <div className='d-flex gap-2 justify-content-around'>
+                    <div className='d-flex gap-3 justify-content-around flex-wrap p-3'>
                         {user.favoriteGames.map(game => (
-                        <Gamecard key={game.id} game_id={game.id} width='50%'/>
+                        <Gamecard key={game.id} game_id={game.id} width='250px'/>
                     ))}
                     </div>
                 </div>

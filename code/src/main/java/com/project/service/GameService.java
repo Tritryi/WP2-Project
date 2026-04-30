@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,13 +30,12 @@ public class GameService {
         if(image!=null){
             try{
                 String uid = UUID.randomUUID().toString();
-                File uploadFolder = new File(uploadDir);
 
                 String originalFilename = image.getOriginalFilename();
                 String extension = originalFilename.substring(originalFilename.lastIndexOf('.'));
 
                 String filename = uid+extension;
-                Path path = Paths.get(uploadDir+filename);
+                Path path = Paths.get(uploadDir,filename);
 
                 Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -65,5 +65,41 @@ public class GameService {
 
     public void deleteById(Long id){
         gameRepository.deleteById(id);
+    }
+
+    public Game updateGame(Game updatedGame, MultipartFile image) {
+        Game existingGame = gameRepository.findById(updatedGame.getId()).orElseThrow(() ->
+                new RuntimeException("Game not found"));
+
+        existingGame.setName(updatedGame.getName());
+        existingGame.setSynopsis(updatedGame.getSynopsis());
+        existingGame.setStudio(updatedGame.getStudio());
+        existingGame.setAverageTimeToFinish(updatedGame.getAverageTimeToFinish());
+        existingGame.setEngine(updatedGame.getEngine());
+        existingGame.setGenres(updatedGame.getGenres());
+
+        if(image!=null && !image.isEmpty()){
+            try{
+                Path existingImagePath = Paths.get(uploadDir+existingGame.getIllustration());
+                Files.deleteIfExists(existingImagePath);
+
+                String uid = UUID.randomUUID().toString();
+                String originalFilename = image.getOriginalFilename();
+                String extension = (originalFilename != null && originalFilename.contains("."))
+                        ? originalFilename.substring(originalFilename.lastIndexOf('.'))
+                        : ".jpg";
+
+                String filename = uid+extension;
+                Path path = Paths.get(uploadDir,filename);
+
+                Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+                existingGame.setIllustration(filename);
+
+            }catch(IOException e){
+                throw new RuntimeException(e);
+            }
+        }
+        return gameRepository.save(existingGame);
+
     }
 }

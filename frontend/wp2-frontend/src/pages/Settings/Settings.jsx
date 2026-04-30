@@ -63,7 +63,7 @@ function Settings(){
     }
 
     const handleFavorite = (game) => {
-        if(favorites.length >3){
+        if(favorites.length >=3){
             alert("Maximum of favorite games reached");
             return;
         }
@@ -151,7 +151,8 @@ function Settings(){
                     {favorites.length >= 0 && (
                         favorites.map(game => (
                             <div className="">
-                                <Favorite key={game.id} name={game.name} imageLink={ILLUSTRATION_URL+game.illustration} handleDelete={() => handleDelete(game.id)} showDelete={true}/>
+                                <Favorite key={game.id} name={game.name} imageLink={game.illustration ? (ILLUSTRATION_URL+game.illustration) : game.imageLink} 
+                                handleDelete={() => handleDelete(game.id)} showDelete={true}/>
                             </div>
                             
                         ))
