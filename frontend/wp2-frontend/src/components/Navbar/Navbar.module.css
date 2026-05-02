@@ -1,5 +1,6 @@
 .links{
     text-decoration: none;
+    font-weight: bold;
 }
 .links:hover{
     opacity: 80%;

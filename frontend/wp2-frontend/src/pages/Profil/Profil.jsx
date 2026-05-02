@@ -14,6 +14,7 @@ import ReviewProfile from '../../components/ReviewProfile/ReviewProfile';
 import { addFriend } from '../../services/user.service';
 import Friend from '../../components/Friend/';
 
+
 function Profil(){
     // const userString = localStorage.getItem("user");
     // const user = userString ? JSON.parse(userString) : null;
@@ -116,7 +117,7 @@ function Profil(){
                     <button 
                         type='button' 
                         onClick={() => handleShowTab("profile")}
-                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "profile" ? "text-primary" : "text-light"}`}
+                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "profile" ? "text-primary" : "text-light"} ${styles.sublink}`}
                     >
                         Profile
                     </button>
@@ -124,7 +125,7 @@ function Profil(){
                     <button 
                         type='button' 
                         onClick={() => handleShowTab("games")}
-                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "games" ? "text-primary" : "text-light"}`}
+                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "games" ? "text-primary" : "text-light"} ${styles.sublink}`}
                     >
                         Game List
                     </button>
@@ -132,7 +133,7 @@ function Profil(){
                     <button 
                         type='button' 
                         onClick={() => handleShowTab("reviews")}
-                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "reviews" ? "text-primary" : "text-light"}`}
+                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "reviews" ? "text-primary" : "text-light"} ${styles.sublink}`}
                     >
                         Reviews
                     </button>
@@ -140,7 +141,7 @@ function Profil(){
                     <button 
                         type='button' 
                         onClick={() => handleShowTab("followings")}
-                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "followings" ? "text-primary" : "text-light"}`}
+                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "followings" ? "text-primary" : "text-light"} ${styles.sublink    }`}
                     >
                         Followings
                     </button>
@@ -209,7 +210,7 @@ function Profil(){
                         <div className='d-flex gap-2 justify-content-around flex-wrap'>
                         {
                             userFollowing.map(f => (
-                                <Friend username={f.username} userPfp={AVATAR_URL+f.profilPicture}/>
+                                <Friend key={f.id} userId={f.id} username={f.username} userPfp={AVATAR_URL+f.profilPicture}/>
                             ))
                         }
 

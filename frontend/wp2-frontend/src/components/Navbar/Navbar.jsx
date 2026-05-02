@@ -46,10 +46,10 @@ function Navbar() {
                             <Avatar imageLink={user.profilPicture ? AVATAR_URL+user.profilPicture : AVATAR_URL+"noavatar.png"} owner={user.username} size='40px'/>
                             <li className='nav-item dropdown'>
                                 <button type='button' 
-                                className='nav-link dropdown-toggle btn btn-secondary text-light border-0' 
+                                className='nav-link dropdown-toggle btn btn-secondary text-light border-0 ' 
                                 data-bs-toggle="dropdown" 
                                 aria-expanded="false">
-                                    {user.username}
+                                    <strong>{user.username}</strong>
                                 </button>
                                 <ul className='dropdown-menu dropdown-menu-end shadow'>
                                     <li><Link className={`dropdown-item ${styles.links}`} to={`/profile/${user.username}`}>My profile</Link></li>
