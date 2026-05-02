@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -36,5 +38,5 @@ public class User {
 
     @ManyToMany
     @JsonIgnore
-    private List<User> friends = new ArrayList<>();
+    private Set<User> friends = new LinkedHashSet<>();
 }
