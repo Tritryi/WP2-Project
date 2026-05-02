@@ -3,6 +3,7 @@ package com.project.controller;
 
 import com.project.config.AuthResponse;
 import com.project.config.JwUtils;
+import com.project.entities.FriendListProjection;
 import com.project.entities.Game;
 import com.project.entities.User;
 import com.project.service.UserService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
     @RequestMapping("/api/user")
@@ -60,5 +62,17 @@ import java.util.List;
             userUpdates.setBio(bio);
             userUpdates.setComputerSpecs(computerSpecs);
             return userService.updateUser(userUpdates, id, avatar, favoriteGamesIds);
+        }
+
+        @PostMapping("/addFriend")
+        public User addFriend(@RequestBody Map<String,Long> data){
+            Long userId = data.get("userId");
+            Long friendId = data.get("friendId");
+            return userService.addFriend(userId, friendId);
+        }
+
+        @GetMapping("/getFriendList")
+        public List<FriendListProjection> getFriendList(@RequestParam(name = "userId") Long userId){
+            return userService.findFriendListByUserId(userId);
         }
     }

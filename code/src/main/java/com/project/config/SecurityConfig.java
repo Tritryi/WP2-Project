@@ -26,6 +26,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/game/**").permitAll()
                         .requestMatchers("/api/user/getUserByName").permitAll()
                         .requestMatchers("/api/user/updateUser").permitAll()
+                        .requestMatchers("/api/user/addFriend").permitAll()
+                        .requestMatchers("/api/user/getFriendList").permitAll()
                         .requestMatchers("/uploads/**").permitAll()
                         .requestMatchers("/api/review/**").permitAll()
                         .anyRequest().authenticated()

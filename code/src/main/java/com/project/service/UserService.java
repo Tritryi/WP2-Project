@@ -1,6 +1,7 @@
 package com.project.service;
 
 
+import com.project.entities.FriendListProjection;
 import com.project.entities.Game;
 import com.project.entities.Role;
 import com.project.entities.User;
@@ -83,5 +84,22 @@ public class UserService {
             return userRepository.save(existingUser);
 
         }).orElse(null);
+    }
+
+    public User addFriend(Long userId, Long friendId){
+        return userRepository.findById(userId).map(existingUser -> {
+            User newFriend = userRepository.findById(friendId).orElse(null);
+            if(newFriend != null){
+                existingUser.getFriends().add(newFriend);
+                return userRepository.save(existingUser);
+            }
+            return existingUser;
+                }).orElse(null);
+
+
+    }
+
+    public List<FriendListProjection> findFriendListByUserId(Long userId){
+        return userRepository.findFriendListByUserId(userId);
     }
 }

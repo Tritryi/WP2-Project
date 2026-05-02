@@ -33,4 +33,8 @@ public class User {
 
     @ManyToMany
     private List<Game> favoriteGames = new ArrayList<>();
+
+    @ManyToMany
+    @JsonIgnore
+    private List<User> friends = new ArrayList<>();
 }
