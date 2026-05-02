@@ -109,10 +109,11 @@ function Profil(){
 
     return(
         <div className="container-fluid d-flex gap-5 justify-content-center">
+
             <div className='d-flex flex-column gap-5'>
                 <div className='d-flex align-items-end gap-5'>
                     <Avatar imageLink={user.profilPicture ? avatar : AVATAR_URL+"noavatar.png"} owner={user.username} />
-                    <h1 className='border border-primary bg-secondary px-4 py-1 rounded shadow-lg text-light'>{user.username}</h1>
+                    <h1 className={styles.neonUsername}>{user.username}</h1>
                 </div>
                 {
                     localUser && localUser.id != user.id && (
@@ -133,7 +134,9 @@ function Profil(){
                     </p>
                 </div>
             </div>
-            <div className=' d-flex flex-column gap-5 '>
+
+
+            <div className=' d-flex flex-column gap-5 flex-grow-1 ' style={{ maxWidth: '800px', minWidth: '500px' }}>
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm d-flex justify-content-around'>
                     <button 
                         type='button' 
@@ -193,10 +196,14 @@ function Profil(){
                     <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                         <h2 className='pb-3'>GameList</h2>
                         <div className='d-flex gap-2 justify-content-around flex-wrap'>
-                        {
+                        { userReviews.length > 0 ? (
                             userReviews.map(r => (
                                 <GameList key={r.id} gameName={r.game.name} gameImage={r.game.illustration} gameId={r.game.id} grade={r.grade} status={r.status}/>
-                            ))
+                            )
+                        )
+                            ) : (
+                                <p>{user.username} has not added any game to their list yet.</p>
+                            )
                         }
 
                         </div>
@@ -210,12 +217,15 @@ function Profil(){
                     <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                         <h2 className='pb-3'>Reviews</h2>
                         <div className='d-flex gap-2 justify-content-around flex-wrap'>
-                        {
+                        { userReviews.length > 0 ? (
                             userReviews.map(r => (
                                 r.comment != "" && (
                                     <ReviewProfile key={r.id} image={r.game.illustration} grade={r.grade} comment={r.comment}/>
                                 )
                             ))
+                            ) : (
+                                <p>{user.username} has not reviewed any game yet.</p>
+                            )
                         }
 
                         </div>
@@ -229,12 +239,15 @@ function Profil(){
                     <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                         <h2 className='pb-3'>Followings</h2>
                         <div className='d-flex gap-2 justify-content-around flex-wrap'>
-                        {
+                        { userFollowing.length > 0 ? (
                             userFollowing.map(f => (
                                 <Friend key={f.username} username={f.username} userPfp={AVATAR_URL+f.profilPicture}/>
                             ))
+                            ) : (
+                                <p>{user.username} is not following anyone yet.</p>
+                            )
                         }
-
+                        
                         </div>
                     </div>
                     )

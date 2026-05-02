@@ -5,3 +5,14 @@
 .sublink:hover{
     color: #0d6efd !important;
 }
+
+.neonUsername {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #0d6efd; /* Le bleu Bootstrap pour l'assise */
+    text-shadow: 1px 1px 0px #fff, /* Un petit contour blanc pour détacher */
+                 0 0 8px rgba(13, 110, 253, 0.5); /* La lueur bleue */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
