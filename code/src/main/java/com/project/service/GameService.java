@@ -59,8 +59,8 @@ public class GameService {
         return gameRepository.findTop3ByGenre(genre);
     }
 
-    public List<Game> findGamesByName(String keyword){
-        return gameRepository.findTop10ByNameContainingIgnoreCase(keyword);
+    public List<Game> findGamesByNameOrGenre(String keyword){
+        return gameRepository.findGamesByNameOrGenre(keyword, PageRequest.of(0, 10));
     }
 
     public void deleteById(Long id){

@@ -13,5 +13,8 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     @Query("SELECT g FROM Game g JOIN g.genres genre WHERE genre = :genre")
     List<Game> findTop3ByGenre(@Param("genre") Genre genre);
 
-    List<Game> findTop10ByNameContainingIgnoreCase(@Param ("name") String keyword);
+    @Query("SELECT DISTINCT g FROM Game g LEFT JOIN g.genres gen " +
+            "WHERE LOWER(g.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "OR LOWER(gen) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<Game> findGamesByNameOrGenre(@Param ("keyword") String keyword, Pageable pageable);
 }

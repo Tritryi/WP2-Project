@@ -31,7 +31,7 @@ public class GameController {
 
     @GetMapping("/getByName")
     public List<Game> getByName(@RequestParam(name = "keyword") String keyword) {
-        return gameService.findGamesByName(keyword);
+        return gameService.findGamesByNameOrGenre(keyword);
     }
 
     @PostMapping(value = "/addGame", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

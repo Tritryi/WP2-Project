@@ -7,6 +7,7 @@ public interface ReviewProjection {
     AuthorSummary getAuthor();
 
     public interface AuthorSummary {
+        Long getId();
         String getUsername();
         String getProfilPicture();
     }
