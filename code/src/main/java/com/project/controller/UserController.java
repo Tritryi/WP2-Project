@@ -75,4 +75,9 @@ import java.util.Map;
         public List<FriendListProjection> getFriendList(@RequestParam(name = "userId") Long userId){
             return userService.findFriendListByUserId(userId);
         }
+
+        @GetMapping("/isFollowing")
+        public boolean isFollowing(@RequestParam(name = "userId") Long userId, @RequestParam(name = "supposedFriendId") Long supposedFriendId){
+            return userService.isFollowing(userId, supposedFriendId);
+        }
     }

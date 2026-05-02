@@ -102,4 +102,8 @@ public class UserService {
     public List<FriendListProjection> findFriendListByUserId(Long userId){
         return userRepository.findFriendListByUserId(userId);
     }
+
+    public boolean isFollowing(Long userId, Long supposedFriendId){
+        return userRepository.isFollowing(userId, supposedFriendId);
+    }
 }

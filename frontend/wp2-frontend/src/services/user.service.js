@@ -42,3 +42,8 @@ export async function getFriendList(userId){
     const response = await fetch (`http://localhost:8080/api/user/getFriendList?userId=${userId}`);
     return response.json();
 }
+
+export async function isFollowingReq(userId, supposedFriendId){
+    const response = await fetch (`http://localhost:8080/api/user/isFollowing?userId=${userId}&supposedFriendId=${supposedFriendId}`);
+    return response.json();
+}

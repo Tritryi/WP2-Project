@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/updateUser").permitAll()
                         .requestMatchers("/api/user/addFriend").permitAll()
                         .requestMatchers("/api/user/getFriendList").permitAll()
+                        .requestMatchers("/api/user/isFollowing").permitAll()
                         .requestMatchers("/uploads/**").permitAll()
                         .requestMatchers("/api/review/**").permitAll()
                         .anyRequest().authenticated()

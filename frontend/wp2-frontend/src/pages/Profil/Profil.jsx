@@ -1,5 +1,5 @@
 import styles from './Profil.module.css';
-import { getUserByName, getFriendList } from '../../services/user.service';
+import { getUserByName, getFriendList, isFollowingReq} from '../../services/user.service';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
@@ -26,6 +26,7 @@ function Profil(){
 
     const [userReviews, setUserReviews] = useState([]);
     const [userFollowing, setUserFollowing] = useState([]);
+    const [isFollowing, setIsFollowing] = useState(false);
 
     const localData = localStorage.getItem("user");
     const localUser = JSON.parse(localData);
@@ -43,6 +44,10 @@ function Profil(){
                 });
                 getFriendList(data.id).then(followings => {
                     setUserFollowing(followings);
+                });
+                isFollowingReq(localUser.id, data.id).then(isFollowing => {
+                    setIsFollowing(isFollowing);
+                    console.log(isFollowing);
                 })
             }
         });
@@ -86,6 +91,11 @@ function Profil(){
             alert("an error occured");
         }
     }
+
+    const handleDeleteFriend = () => {
+        console.log("will delete");
+    }
+
     return(
         <div className="container-fluid d-flex gap-5 justify-content-center">
             <div className='d-flex flex-column gap-5'>
@@ -95,8 +105,8 @@ function Profil(){
                 </div>
                 {
                     localUser && localUser.id != user.id && (
-                        <button className='btn btn-primary w-25' onClick={handleAddFriend}>
-                            Follow +
+                        <button className='btn btn-primary w-25' onClick={isFollowing ? handleDeleteFriend : handleAddFriend}>
+                            {isFollowing ? "Unfollow" : "Follow"}
                         </button>
                     )
                 }
