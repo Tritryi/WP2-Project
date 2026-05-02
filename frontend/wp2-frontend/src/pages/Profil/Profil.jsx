@@ -210,7 +210,7 @@ function Profil(){
                         <div className='d-flex gap-2 justify-content-around flex-wrap'>
                         {
                             userFollowing.map(f => (
-                                <Friend key={f.id} userId={f.id} username={f.username} userPfp={AVATAR_URL+f.profilPicture}/>
+                                <Friend key={f.username} username={f.username} userPfp={AVATAR_URL+f.profilPicture}/>
                             ))
                         }
 
