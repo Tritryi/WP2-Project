@@ -32,7 +32,7 @@ function Home(){
                 Everything is here!
             </h3>
         </div>
-        <Link className="btn btn-dark btn-lg mb-5" to="/">Discover</Link>
+        <Link className="btn btn-dark btn-lg mb-5" to="/discover">Discover</Link>
 
         
         <SearchGame />

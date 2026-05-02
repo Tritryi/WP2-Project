@@ -12,6 +12,7 @@ import Login from './pages/Login'
 import Profil from './pages/Profil';
 import Settings from './pages/Settings';
 import Gameadder from './pages/Gameadder/';
+import Discover from './pages/Discover';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
         <Route path='/profile/:username' element={<Profil />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/addGame' element={<Gameadder />} />
+        <Route path='/discover' element={<Discover />}/>
       </Routes>
       </main>
       <Footer />
