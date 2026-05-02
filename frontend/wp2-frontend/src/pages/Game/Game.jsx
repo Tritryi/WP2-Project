@@ -1,5 +1,5 @@
 import { useState, useEffect, use } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getOneGame } from '../../services/game.service.js';
 import styles from './Game.module.css'
 import Avatar from '../../components/Avatar/Avatar.jsx';
@@ -98,12 +98,13 @@ function Game(){
                 <h2 className='h4 mb-4 border-bottom pb-2'>Community Reviews</h2>
                 {reviews != null && reviews.length > 0 ? (
                     reviews.map(r => (
-                        <Review 
+                        <Review
                             key={r.id} 
                             comment={r.comment} 
                             grade={r.grade} 
                             author={r.author.username} 
                             author_avatar={AVATAR_URL + r.author.profilPicture}
+                            author_id={r.author.id}
                         />
                     ))
                 ) : (

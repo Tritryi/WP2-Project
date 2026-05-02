@@ -6,7 +6,7 @@ function Footer(){
             <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 mt-auto border-top border-secondary bg-dark p-5">
                 <div className="text-white">
                     <h1>ViGameList</h1>
-                    <p>Facebook</p>
+                    <p>Bluesky</p>
                 </div>
                 <div className="text-white d-flex flex-row flex-wrap gap-3">
                     <p>Home</p>
