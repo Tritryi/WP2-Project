@@ -12,6 +12,7 @@ import GameList from '../../components/GameList/GameList';
 import ReviewProfile from '../../components/ReviewProfile/ReviewProfile';
 
 import { addFriend } from '../../services/user.service';
+import Friend from '../../components/Friend/';
 
 function Profil(){
     // const userString = localStorage.getItem("user");
@@ -169,7 +170,7 @@ function Profil(){
                     tabToShow == "games" && (
                     <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                         <h2 className='pb-3'>GameList</h2>
-                        <div className='d-flex gap-2 justify-content-around'>
+                        <div className='d-flex gap-2 justify-content-around flex-wrap'>
                         {
                             userReviews.map(r => (
                                 <GameList key={r.id} gameName={r.game.name} gameImage={r.game.illustration} gameId={r.game.id} grade={r.grade} status={r.status}/>
@@ -186,10 +187,12 @@ function Profil(){
                     tabToShow == "reviews" && (
                     <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                         <h2 className='pb-3'>Reviews</h2>
-                        <div className='d-flex gap-2 justify-content-around'>
+                        <div className='d-flex gap-2 justify-content-around flex-wrap'>
                         {
                             userReviews.map(r => (
-                                <ReviewProfile key={r.id} image={r.game.illustration} grade={r.grade} comment={r.comment}/>
+                                r.comment != "" && (
+                                    <ReviewProfile key={r.id} image={r.game.illustration} grade={r.grade} comment={r.comment}/>
+                                )
                             ))
                         }
 
@@ -203,12 +206,12 @@ function Profil(){
                     tabToShow == "followings" && (
                     <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                         <h2 className='pb-3'>Followings</h2>
-                        <div className='d-flex gap-2 justify-content-around'>
-                        {/* {
+                        <div className='d-flex gap-2 justify-content-around flex-wrap'>
+                        {
                             userFollowing.map(f => (
-                                
+                                <Friend username={f.username} userPfp={AVATAR_URL+f.profilPicture}/>
                             ))
-                        } */}
+                        }
 
                         </div>
                     </div>
