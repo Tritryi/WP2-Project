@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import Avatar from "../Avatar";
 
-function Friend({username, userPfp}){
+function Friend({userId, username, userPfp}){
     return(
-        <div className="d-flex flex-column align-items-center">
+        <Link className="d-flex flex-column align-items-center text-light" to={`/profile/${userId}`} style={{textDecoration: "none"}}>
             <Avatar imageLink={userPfp} owner={username} size="6em"/>
             <span>{username}</span>
-        </div>
+        </Link>
     )
 }
 
