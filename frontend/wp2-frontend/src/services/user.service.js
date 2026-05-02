@@ -27,3 +27,18 @@ export async function updateUser(newSettings){
         body: newSettings
     });
 }
+
+export async function addFriend(addFriendData){
+    return await fetch("http://localhost:8080/api/user/addFriend", {
+        method: "POST",
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(addFriendData)
+    })
+}
+
+export async function getFriendList(userId){
+    const response = await fetch (`http://localhost:8080/api/user/getFriendList?userId=${userId}`);
+    return response.json();
+}

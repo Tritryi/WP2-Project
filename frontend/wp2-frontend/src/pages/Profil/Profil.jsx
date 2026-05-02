@@ -1,5 +1,5 @@
 import styles from './Profil.module.css';
-import { getUserByName } from '../../services/user.service';
+import { getUserByName, getFriendList } from '../../services/user.service';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
@@ -11,6 +11,8 @@ import { getUserReviews } from '../../services/game.service';
 import GameList from '../../components/GameList/GameList';
 import ReviewProfile from '../../components/ReviewProfile/ReviewProfile';
 
+import { addFriend } from '../../services/user.service';
+
 function Profil(){
     // const userString = localStorage.getItem("user");
     // const user = userString ? JSON.parse(userString) : null;
@@ -21,17 +23,25 @@ function Profil(){
     const [tabToShow, setTabToShow] = useState("profile");
 
     const [userReviews, setUserReviews] = useState([]);
+    const [userFollowing, setUserFollowing] = useState([]);
+
+    const localData = localStorage.getItem("user");
+    const localUser = JSON.parse(localData);
 
 
     useEffect(() => {
         getUserByName(username).then(data => {
             setUser(data);
+            console.log(data);
 
             if (data && data.id){
                 document.title = data.username;
                 getUserReviews(data.id).then(reviews => {
                     setUserReviews(reviews);
                 });
+                getFriendList(data.id).then(followings => {
+                    setUserFollowing(followings);
+                })
             }
         });
     }, [username]);
@@ -51,13 +61,29 @@ function Profil(){
         setTabToShow(tab);
     }
 
-    async function loadGameList(){
-        const data = await getUserReviews(user.id);
-        setUserReviews(data);
+    // async function loadGameList(){
+    //     const data = await getUserReviews(user.id);
+    //     setUserReviews(data);
         
-    }
+    // }
+
     const totalGames = userReviews.length;
     const totalReviews = userReviews.filter(r => r.comment && r.comment.trim() !== "").length;
+
+
+    const handleAddFriend = async () => {
+        const addFriendData = {
+            "userId" : localUser.id,
+            "friendId" : user.id
+        }
+
+        const response = await addFriend(addFriendData);
+        if (response.ok){
+            alert(`You are now following ${user.username}!`);
+        }else{
+            alert("an error occured");
+        }
+    }
     return(
         <div className="container-fluid d-flex gap-5 justify-content-center">
             <div className='d-flex flex-column gap-5'>
@@ -65,6 +91,15 @@ function Profil(){
                     <Avatar imageLink={user.profilPicture ? avatar : AVATAR_URL+"noavatar.png"} owner={user.username} />
                     <h1 className='border border-primary bg-secondary px-4 py-1 rounded shadow-lg text-light'>{user.username}</h1>
                 </div>
+                {
+                    localUser && localUser.id != user.id && (
+                        <button className='btn btn-primary w-25' onClick={handleAddFriend}>
+                            Follow +
+                        </button>
+                    )
+                }
+                
+
                 <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm '>
                     <p>{user.bio && user.bio != "null" ? user.bio : "Not specified"}</p>
                 </div>
@@ -100,6 +135,14 @@ function Profil(){
                     >
                         Reviews
                     </button>
+
+                    <button 
+                        type='button' 
+                        onClick={() => handleShowTab("followings")}
+                        className={`btn btn-link text-decoration-none fw-bold ${tabToShow === "followings" ? "text-primary" : "text-light"}`}
+                    >
+                        Followings
+                    </button>
                 </div>
                 
                 {
@@ -108,8 +151,14 @@ function Profil(){
                     <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
                         <h2 className='pb-3'>Statistics</h2>
                         <div className='d-flex gap-2 justify-content-around'>
-                            <h2>{totalGames}</h2>
-                            <h2>{totalReviews}</h2>
+                            <div className='d-flex flex-column align-items-center'>
+                                <h2>{totalGames}</h2>
+                                <span>Total games</span>
+                            </div>
+                            <div className='d-flex flex-column align-items-center'>
+                                <h2>{totalReviews}</h2>
+                                <span>Game reviewed</span>
+                            </div>
                         </div>
                 </div>
                     )
@@ -143,6 +192,23 @@ function Profil(){
                                 <ReviewProfile key={r.id} image={r.game.illustration} grade={r.grade} comment={r.comment}/>
                             ))
                         }
+
+                        </div>
+                    </div>
+                    )
+                }
+
+                {
+                    /* Dsplaying Follow list */
+                    tabToShow == "followings" && (
+                    <div className='bg-dark text-light border border-sm rounded p-2 shadow-sm'>
+                        <h2 className='pb-3'>Followings</h2>
+                        <div className='d-flex gap-2 justify-content-around'>
+                        {/* {
+                            userFollowing.map(f => (
+                                
+                            ))
+                        } */}
 
                         </div>
                     </div>
