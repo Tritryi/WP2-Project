@@ -71,6 +71,13 @@ import java.util.Map;
             return userService.addFriend(userId, friendId);
         }
 
+        @PostMapping("/deleteFriend")
+        public User deleteFriend(@RequestBody Map<String,Long> data){
+            Long userId = data.get("userId");
+            Long friendId = data.get("friendId");
+            return userService.deleteFriend(userId, friendId);
+        }
+
         @GetMapping("/getFriendList")
         public List<FriendListProjection> getFriendList(@RequestParam(name = "userId") Long userId){
             return userService.findFriendListByUserId(userId);

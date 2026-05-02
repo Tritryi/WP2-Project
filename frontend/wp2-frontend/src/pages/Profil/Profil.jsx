@@ -1,5 +1,5 @@
 import styles from './Profil.module.css';
-import { getUserByName, getFriendList, isFollowingReq} from '../../services/user.service';
+import { getUserByName, getFriendList, isFollowingReq, addFriend, deleteFriend} from '../../services/user.service';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
@@ -11,7 +11,6 @@ import { getUserReviews } from '../../services/game.service';
 import GameList from '../../components/GameList/GameList';
 import ReviewProfile from '../../components/ReviewProfile/ReviewProfile';
 
-import { addFriend } from '../../services/user.service';
 import Friend from '../../components/Friend/';
 
 
@@ -82,18 +81,30 @@ function Profil(){
         const addFriendData = {
             "userId" : localUser.id,
             "friendId" : user.id
-        }
+        };
 
         const response = await addFriend(addFriendData);
         if (response.ok){
             alert(`You are now following ${user.username}!`);
+            location.reload();
         }else{
-            alert("an error occured");
+            alert("an error occurred");
         }
     }
 
-    const handleDeleteFriend = () => {
-        console.log("will delete");
+    const handleDeleteFriend = async () => {
+        const deleteFriendData = {
+            "userId" : localUser.id,
+            "friendId" : user.id
+        };
+
+        const response = await deleteFriend(deleteFriendData);
+        if(response.ok){
+            alert(`${user.username} unfollowed.`);
+            location.reload();
+        }else{
+            alert("an error occurred");
+        }
     }
 
     return(

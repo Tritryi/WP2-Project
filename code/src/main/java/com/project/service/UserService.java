@@ -99,6 +99,17 @@ public class UserService {
 
     }
 
+    public User deleteFriend(Long userId, Long friendId){
+        return userRepository.findById(userId).map(existingUser -> {
+            User friendToDelete = userRepository.findById(friendId).orElse(null);
+            if(friendToDelete != null){
+                existingUser.getFriends().remove(friendToDelete);
+                return userRepository.save(existingUser);
+            }
+            return existingUser;
+        }).orElse(null);
+    }
+
     public List<FriendListProjection> findFriendListByUserId(Long userId){
         return userRepository.findFriendListByUserId(userId);
     }
