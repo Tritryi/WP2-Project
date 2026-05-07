@@ -25,8 +25,8 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarNa  v">
-            <ul className="navbar-nav ms-auto align-items-center gap-4">
+        <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto align-items-start align-items-lg-center gap-4 pt-4">                
                 <Link className={`nav-item text-light d-flex align-items-center gap-2 ${styles.links}`} to="/discover">
                     Discover 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
